@@ -36,7 +36,7 @@ void adl_custom_setup(DeviceBase * pdevices[], int ndevices, ParameterBase * ppa
     (void)ndevices; (void)pparams; (void)nparams;
 
     rgb_setup((AdafruitNeoPixelADL*)(pdevices[0]), (AdafruitNeoPixelADL*)(pdevices[1]));
-    buttons_setup((BinaryOutput*)(pdevices[1]));
+    buttons_setup((BinaryOutput*)(pdevices[2]));
 
     my_task.start();
 }

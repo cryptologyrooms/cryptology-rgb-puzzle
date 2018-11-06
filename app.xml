@@ -7,12 +7,12 @@
     
     <devices>
         <device name="Fixed NeoPixels" type="Adafruit NeoPixel">
-            <setting id="pin" value="4"/>
+            <setting id="pin" value="5"/>
             <setting id="npixels" value="5"/>
         </device>
 
         <device name="Variable NeoPixels" type="Adafruit NeoPixel">
-            <setting id="pin" value="5"/>
+            <setting id="pin" value="4"/>
             <setting id="npixels" value="5"/>
         </device>
 
@@ -35,6 +35,7 @@
             <setting id="r_default" value="0"/>
             <setting id="g_default" value="0"/>
             <setting id="b_default" value="0"/>
+            <setting id="use_eeprom" value="true"/>
         </parameter>
         <parameter name="RGB1" type="RGB">
             <setting id="limit" value="4095"/>
@@ -42,6 +43,7 @@
             <setting id="r_default" value="0"/>
             <setting id="g_default" value="0"/>
             <setting id="b_default" value="0"/>
+            <setting id="use_eeprom" value="true"/>
         </parameter>
         <parameter name="RGB2" type="RGB">
             <setting id="limit" value="4095"/>
@@ -49,6 +51,7 @@
             <setting id="r_default" value="0"/>
             <setting id="g_default" value="0"/>
             <setting id="b_default" value="0"/>
+            <setting id="use_eeprom" value="true"/>
         </parameter>
         <parameter name="RGB3" type="RGB">
             <setting id="limit" value="4095"/>
@@ -56,6 +59,7 @@
             <setting id="r_default" value="0"/>
             <setting id="g_default" value="0"/>
             <setting id="b_default" value="0"/>
+            <setting id="use_eeprom" value="true"/>
         </parameter>
         <parameter name="RGB4" type="RGB">
             <setting id="limit" value="4095"/>
@@ -63,6 +67,7 @@
             <setting id="r_default" value="0"/>
             <setting id="g_default" value="0"/>
             <setting id="b_default" value="0"/>
+            <setting id="use_eeprom" value="true"/>
         </parameter>
     </parameters>
 
@@ -81,5 +86,9 @@
 
     <logging>
         <log_module>BUTTONS</log_module>
+        <log_module>RGB</log_module>
     </logging>
+
+    <adl protocol="url"></adl>
+
 </board>

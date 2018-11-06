@@ -33,6 +33,8 @@
 static AdafruitNeoPixelADL * s_pFixed;
 static AdafruitNeoPixelADL * s_pVariable;
 
+static RGBParam ** s_pRGBFixed;
+
 static void update_fixed(RGBParam * pRGBFixed[5])
 {
     for (uint8_t i=0; i<5; i++)
@@ -44,7 +46,20 @@ static void update_fixed(RGBParam * pRGBFixed[5])
             pRGBFixed[i]->get(eB) / PIXEL_TYPE
         );
     }
+    s_pFixed->pixels().show();
 }
+
+
+static void debug_task_fn(ADLTask& pThisTask, void * pTaskData)
+{
+    (void)pThisTask;
+    (void)pTaskData;
+    for (uint8_t i=0; i<5; i++)
+    {
+        adl_logln(LOG_RGB, "%d,%d,%d", s_pRGBFixed[i]->get(eR), s_pRGBFixed[i]->get(eG), s_pRGBFixed[i]->get(eB));
+    }
+}
+static ADLTask debug_task(2000, debug_task_fn, NULL);
 
 /* Public Functions */
 
@@ -56,5 +71,7 @@ void rgb_setup(AdafruitNeoPixelADL * pFixed, AdafruitNeoPixelADL * pVariable)
 
 void rgb_tick(RGBParam * pRGBFixed[5])
 {
+    s_pRGBFixed = pRGBFixed;
+    debug_task.run();
     update_fixed(pRGBFixed);
 }
