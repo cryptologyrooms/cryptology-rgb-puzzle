@@ -32,6 +32,7 @@
 /* Local Objects and Variables */
 static AdafruitNeoPixelADL * s_pFixed;
 static AdafruitNeoPixelADL * s_pVariable;
+static uint8_t const * s_pVariableLevels;
 
 static RGBParam ** s_pRGBFixed;
 
@@ -67,9 +68,13 @@ static void debug_task_fn(ADLTask& pThisTask, void * pTaskData)
 {
     (void)pThisTask;
     (void)pTaskData;
+    adl_logln(LOG_RGB, "Levels:");
     for (uint8_t i=0; i<5; i++)
     {
-        adl_logln(LOG_RGB, "%d,%d,%d", s_pRGBFixed[i]->get(eR), s_pRGBFixed[i]->get(eG), s_pRGBFixed[i]->get(eB));
+        adl_logln(LOG_RGB, "F: %d,%d,%d, V: %d,%d,%d",
+            s_pRGBFixed[i]->get(eR), s_pRGBFixed[i]->get(eG), s_pRGBFixed[i]->get(eB),
+            s_pVariableLevels[(i*3)+0], s_pVariableLevels[(i*3)+1], s_pVariableLevels[(i*3)+2]
+        );
     }
 }
 static ADLTask debug_task(2000, debug_task_fn, NULL);
@@ -85,6 +90,7 @@ void rgb_setup(AdafruitNeoPixelADL * pFixed, AdafruitNeoPixelADL * pVariable)
 void rgb_tick(RGBParam * pRGBFixed[5], uint8_t const * const pVariableLevels, uint32_t multiplier)
 {
     s_pRGBFixed = pRGBFixed;
+    s_pVariableLevels = pVariableLevels;
     debug_task.run();
     update_fixed(pRGBFixed, multiplier);
     update_variable(pVariableLevels, multiplier);

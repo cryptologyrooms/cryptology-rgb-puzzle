@@ -63,7 +63,7 @@ static void debouncer_task_fn(ADLTask& pThisTask, void * pTaskData)
 }
 static ADLTask debouncer_task(5, debouncer_task_fn, NULL);
 
-static void debug_task_fn(ADLTask& pThisTask, void * pTaskData)
+/*static void debug_task_fn(ADLTask& pThisTask, void * pTaskData)
 {
     (void)pThisTask;
     (void)pTaskData;
@@ -86,7 +86,7 @@ static void debug_task_fn(ADLTask& pThisTask, void * pTaskData)
         s_debouncers[14].count()
     );
 }
-static ADLTask debug_task(500, debug_task_fn, NULL);
+static ADLTask debug_task(500, debug_task_fn, NULL);*/
 
 /* Public Functions */
 
