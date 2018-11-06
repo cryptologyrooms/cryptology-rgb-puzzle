@@ -30,7 +30,7 @@
 
     <parameters>
         <parameter name="RGB0" type="RGB">
-            <setting id="limit" value="4095"/>
+            <setting id="limit" value="7"/>
             <setting id="clip" value="true"/>
             <setting id="r_default" value="0"/>
             <setting id="g_default" value="0"/>
@@ -38,7 +38,7 @@
             <setting id="use_eeprom" value="true"/>
         </parameter>
         <parameter name="RGB1" type="RGB">
-            <setting id="limit" value="4095"/>
+            <setting id="limit" value="7"/>
             <setting id="clip" value="true"/>
             <setting id="r_default" value="0"/>
             <setting id="g_default" value="0"/>
@@ -46,7 +46,7 @@
             <setting id="use_eeprom" value="true"/>
         </parameter>
         <parameter name="RGB2" type="RGB">
-            <setting id="limit" value="4095"/>
+            <setting id="limit" value="7"/>
             <setting id="clip" value="true"/>
             <setting id="r_default" value="0"/>
             <setting id="g_default" value="0"/>
@@ -54,7 +54,7 @@
             <setting id="use_eeprom" value="true"/>
         </parameter>
         <parameter name="RGB3" type="RGB">
-            <setting id="limit" value="4095"/>
+            <setting id="limit" value="7"/>
             <setting id="clip" value="true"/>
             <setting id="r_default" value="0"/>
             <setting id="g_default" value="0"/>
@@ -62,11 +62,17 @@
             <setting id="use_eeprom" value="true"/>
         </parameter>
         <parameter name="RGB4" type="RGB">
-            <setting id="limit" value="4095"/>
+            <setting id="limit" value="7"/>
             <setting id="clip" value="true"/>
             <setting id="r_default" value="0"/>
             <setting id="g_default" value="0"/>
             <setting id="b_default" value="0"/>
+            <setting id="use_eeprom" value="true"/>
+        </parameter>
+        <parameter name="Step" type="Integer">
+            <setting id="clip" value="false"/>
+            <setting id="min" value="0"/>
+            <setting id="max" value="585"/>
             <setting id="use_eeprom" value="true"/>
         </parameter>
     </parameters>

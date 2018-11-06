@@ -13,6 +13,7 @@
 #include "adl-oneshot-task.h"
 #include "adl-task.h"
 
+#include "integer-param.h"
 #include "rgb-param.h"
 
 /* Application Includes */
@@ -47,5 +48,5 @@ void adl_custom_loop(DeviceBase * pdevices[], int ndevices, ParameterBase * ppar
     my_task.run();
 
     buttons_tick();
-    rgb_tick((RGBParam**)pparams);
+    rgb_tick((RGBParam**)pparams, buttons_get_levels(), ((IntegerParam*)pparams[5])->value());
 }

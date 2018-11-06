@@ -114,3 +114,8 @@ void buttons_tick()
         }
     }
 }
+
+const uint8_t * const buttons_get_levels()
+{
+    return s_levels;
+}
