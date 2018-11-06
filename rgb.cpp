@@ -49,18 +49,18 @@ static void update_fixed(RGBParam * pRGBFixed[5], uint32_t multiplier)
     s_pFixed->pixels().show();
 }
 
-static void update_fixed(uint8_t const * const pVariableLevels, uint32_t multiplier)
+static void update_variable(uint8_t const * const pVariableLevels, uint32_t multiplier)
 {
     for (uint8_t i=0; i<5; i++)
     {
-        s_pFixed->pixels().setPixelColor(
+        s_pVariable->pixels().setPixelColor(
             i,
             (multiplier * pVariableLevels[i*3]) / PIXEL_TYPE,
             (multiplier * pVariableLevels[(i*3)+1]) / PIXEL_TYPE,
             (multiplier * pVariableLevels[(i*3)+2]) / PIXEL_TYPE
         );
     }
-    s_pFixed->pixels().show();
+    s_pVariable->pixels().show();
 }
 
 static void debug_task_fn(ADLTask& pThisTask, void * pTaskData)

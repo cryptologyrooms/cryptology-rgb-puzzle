@@ -48,5 +48,5 @@ void adl_custom_loop(DeviceBase * pdevices[], int ndevices, ParameterBase * ppar
     my_task.run();
 
     buttons_tick();
-    rgb_tick((RGBParam**)pparams, buttons_get_levels(), ((IntegerParam*)pparams[5])->value());
+    rgb_tick((RGBParam**)pparams, buttons_get_levels(), ((IntegerParam*)pparams[5])->get());
 }

@@ -28,6 +28,8 @@ public:
 
 static uint8_t s_current_button = 0;
 
+static uint8_t s_levels[15] = {0};
+
 static BinaryOutput * s_pButtonSelect;
 static HC4067Reader s_HC4067Reader;
 
@@ -111,11 +113,12 @@ void buttons_tick()
         if (s_debouncers[i].check_high_and_clear())
         {
             adl_logln(LOG_BUT, "Button %d pressed", i);
+            incrementwithrollover(s_levels[i], 7);
         }
     }
 }
 
-const uint8_t * const buttons_get_levels()
+uint8_t const * buttons_get_levels()
 {
     return s_levels;
 }
