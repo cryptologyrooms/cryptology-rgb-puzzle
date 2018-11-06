@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+
+<board type="Arduino Nano" name="app">
+    <info>
+        A puzzle based on matching RGB LED colours
+    </info>
+    
+    <devices>
+        <device name="Fixed NeoPixels" type="TLC5973">
+            <setting id="pin" value="5"/>
+            <setting id="num_leds" value="5"/>
+        </device>
+
+        <device name="Variable NeoPixels" type="TLC5973">
+            <setting id="pin" value="4"/>
+            <setting id="num_leds" value="5"/>
+        </device>
+
+        <device name="Binary Output" type="Binary Output">
+            <setting id="pins" value="8, 9, 10, 11"/>
+        </device>
+
+        <device name="Onboard LED" type="Timed OnOff">
+            <setting id="pin" name="LED" value="13"/>
+            <setting id="ontime" value="500"/>
+            <setting id="offtime" value="500"/>
+        </device>
+
+    </devices>
+
+    <parameters>
+        <parameter name="RGB0" type="RGB">
+            <setting id="limit" value="7"/>
+            <setting id="clip" value="true"/>
+            <setting id="r_default" value="0"/>
+            <setting id="g_default" value="0"/>
+            <setting id="b_default" value="0"/>
+            <setting id="use_eeprom" value="true"/>
+        </parameter>
+        <parameter name="RGB1" type="RGB">
+            <setting id="limit" value="7"/>
+            <setting id="clip" value="true"/>
+            <setting id="r_default" value="0"/>
+            <setting id="g_default" value="0"/>
+            <setting id="b_default" value="0"/>
+            <setting id="use_eeprom" value="true"/>
+        </parameter>
+        <parameter name="RGB2" type="RGB">
+            <setting id="limit" value="7"/>
+            <setting id="clip" value="true"/>
+            <setting id="r_default" value="0"/>
+            <setting id="g_default" value="0"/>
+            <setting id="b_default" value="0"/>
+            <setting id="use_eeprom" value="true"/>
+        </parameter>
+        <parameter name="RGB3" type="RGB">
+            <setting id="limit" value="7"/>
+            <setting id="clip" value="true"/>
+            <setting id="r_default" value="0"/>
+            <setting id="g_default" value="0"/>
+            <setting id="b_default" value="0"/>
+            <setting id="use_eeprom" value="true"/>
+        </parameter>
+        <parameter name="RGB4" type="RGB">
+            <setting id="limit" value="7"/>
+            <setting id="clip" value="true"/>
+            <setting id="r_default" value="0"/>
+            <setting id="g_default" value="0"/>
+            <setting id="b_default" value="0"/>
+            <setting id="use_eeprom" value="true"/>
+        </parameter>
+        <parameter name="Step" type="Integer">
+            <setting id="clip" value="false"/>
+            <setting id="min" value="0"/>
+            <setting id="max" value="585"/>
+            <setting id="use_eeprom" value="true"/>
+        </parameter>
+    </parameters>
+
+    <modules>
+        <module>Task</module>
+        <module>Debouncer</module>
+    </modules>
+    
+    <custom_code>
+        <file>application.cpp</file>
+        <file>buttons.cpp</file>
+        <file>buttons.h</file>
+        <file>rgb.cpp</file>
+        <file>rgb.h</file>
+    </custom_code>
+
+    <logging>
+        <log_module>BUTTONS</log_module>
+        <log_module>RGB</log_module>
+    </logging>
+
+    <adl protocol="url"></adl>
+
+</board>
