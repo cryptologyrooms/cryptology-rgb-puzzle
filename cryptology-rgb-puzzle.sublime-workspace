@@ -4,8 +4,16 @@
 		"selected_items":
 		[
 			[
-				"pVari",
-				"pVariableLevels"
+				"REL",
+				"RELAY_PIN"
+			],
+			[
+				"digit",
+				"digitalWrite\tArduino digitalWrite"
+			],
+			[
+				"digital",
+				"digitalRead\tArduino digitalRead"
 			],
 			[
 				"CPPU",
@@ -178,14 +186,6 @@
 			[
 				"m_deob",
 				"m_debounce_count_max"
-			],
-			[
-				"digit",
-				"digitalRead\tArduino digitalRead"
-			],
-			[
-				"digital",
-				"digitalWrite\tArduino digitalWrite"
 			],
 			[
 				"time",
@@ -520,12 +520,20 @@
 	"buffers":
 	[
 		{
-			"file": "buttons.cpp",
+			"file": "application.cpp",
 			"settings":
 			{
-				"buffer_size": 2992,
+				"buffer_size": 1852,
 				"encoding": "UTF-8",
-				"line_ending": "Windows"
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/rgb-param.h",
+			"settings":
+			{
+				"buffer_size": 698,
+				"line_ending": "Unix"
 			}
 		},
 		{
@@ -533,44 +541,50 @@
 			"settings":
 			{
 				"buffer_size": 222,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
+				"line_ending": "Unix"
 			}
 		},
 		{
 			"file": "rgb.cpp",
 			"settings":
 			{
-				"buffer_size": 2167,
+				"buffer_size": 2427,
 				"encoding": "UTF-8",
-				"line_ending": "Windows"
+				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "application.cpp",
+			"file": "buttons.cpp",
 			"settings":
 			{
-				"buffer_size": 1168,
+				"buffer_size": 3077,
 				"encoding": "UTF-8",
-				"line_ending": "Windows"
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "neopixel-app.xml",
+			"settings":
+			{
+				"buffer_size": 3355,
+				"line_ending": "Unix"
 			}
 		},
 		{
 			"file": "buttons.h",
 			"settings":
 			{
-				"buffer_size": 164,
+				"buffer_size": 158,
 				"encoding": "UTF-8",
-				"line_ending": "Windows"
+				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "app.xml",
+			"file": "app/adl.h",
 			"settings":
 			{
-				"buffer_size": 3355,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
+				"buffer_size": 553,
+				"line_ending": "Unix"
 			}
 		}
 	],
@@ -614,11 +628,37 @@
 	},
 	"expanded_folders":
 	[
-		"/C/Users/jfowkes/Documents/code/cryptology-rgb-puzzle"
+		"/home/james/code/cryptology/cryptology-rgb-puzzle"
 	],
 	"file_history":
 	[
+		"/home/james/code/cryptology/cryptology-rgb-puzzle/tlc5973-app.xml",
+		"/home/james/code/cryptology/cryptology-rgb-puzzle/app/rgb.cpp",
+		"/home/james/code/Libs/utility/util_macros.h",
+		"/home/james/code/cryptology/cryptology-rgb-puzzle/app.xml",
+		"/home/james/code/cryptology/cryptology-rgb-puzzle/app/rgb-param.h",
+		"/home/james/code/cryptology/cryptology-rgb-puzzle/app/rgb-param.cpp",
+		"/home/james/code/cryptology/cryptology-rgb-puzzle/app/buttons.cpp",
+		"/home/james/code/cryptology/cryptology-rgb-puzzle/buttons.cpp",
+		"/home/james/code/cryptology/cryptology-rgb-puzzle/app/parameter.h",
+		"/home/james/code/cryptology/cryptology-rgb-puzzle/app/adl-util-limited-range-int.h",
+		"/home/james/code/cryptology/cryptology-rgb-puzzle/app/adl-nv.h",
+		"/home/james/code/cryptology/cryptology-rgb-puzzle/app/adl-nv-eeprom.cpp",
+		"/home/james/code/cryptology/cryptology-rgb-puzzle/app/app.ino",
+		"/home/james/code/cryptology/cryptology-rgb-puzzle/app/adl-task.h",
+		"/home/james/code/cryptology/cryptology-rgb-puzzle/app/protocol.h",
+		"/home/james/code/cryptology/cryptology-rgb-puzzle/app/url.cpp",
+		"/home/james/code/cryptology/cryptology-rgb-puzzle/rgb.cpp",
+		"/home/james/code/cryptology/cryptology-rgb-puzzle/rgb.h",
+		"/home/james/code/cryptology/cryptology-rgb-puzzle/application.cpp",
+		"/home/james/code/cryptology/cryptology-rgb-puzzle/app/adafruit-neopixel-adl.h",
+		"/home/james/code/cryptology/cryptology-rgb-puzzle/buttons.h",
+		"/home/james/code/cryptology/cryptology-rgb-puzzle/app/adl-logging.cpp",
+		"/home/james/code/cryptology/cryptology-rgb-puzzle/app/adl-debouncer.cpp",
+		"/home/james/code/cryptology/cryptology-rgb-puzzle/app/adl-debouncer.h",
+		"/home/james/code/cryptology/cryptology-rgb-puzzle/README.md",
 		"/home/james/code/adl/adl/devices/binary-output.device-plugin/binary-output.cpp",
+		"/home/james/code/adl/adl/devices/binary-output.device-plugin/example.xml",
 		"/home/james/code/adl/adl_runner.py",
 		"/home/james/code/adl/arduino_cli_interface.py",
 		"/home/james/code/adl/adl/devices/random-pwm.device-plugin/random-pwm.cpp",
@@ -629,7 +669,6 @@
 		"/home/james/code/adl/adl/parameters/rgb/rgb-param.cpp",
 		"/home/james/code/adl/adl/parameters/unittest/adl-parameter-rgb.unittest.cpp",
 		"/home/james/code/adl/adl/parameters/unittest/makefile",
-		"/home/james/code/adl/adl/devices/binary-output.device-plugin/example.xml",
 		"/home/james/code/adl/adl/adl_code/logging/adl_logging.tpl",
 		"/home/james/code/adl/adl/devices/debounced-input.device-plugin/example.xml",
 		"/home/james/code/adl/adl/devices/debounced-input.device-plugin/debounced-input.cpp",
@@ -720,40 +759,15 @@
 		"/home/james/code/adl/adl/adl_code/adl-util-limited-range-int.h",
 		"/home/james/code/adl/adl/parameters/integer/example.xml",
 		"/home/james/code/adl/example.xml",
-		"/home/james/Arduino/libraries/Adafruit_NeoPixel/Adafruit_NeoPixel.h",
-		"/home/james/code/adl/adl/devices/adafruit-neopixel.device-plugin/adafruit_neopixel.py",
-		"/home/james/code/xscape-vault-puzzle/xscape-vault-puzzle/combination.cpp",
-		"/home/james/code/adl/adl/devices/debounced-input.device-plugin/debounced_input.py",
-		"/home/james/code/adl/adl/devices/TLC5973.device-plugin/TLC5973.py",
-		"/home/james/code/adl/adl/template_engine.py",
-		"/home/james/code/adl/adl/boards/adl-main.tpl",
-		"/home/james/code/adl/adl/adl_code/adl-callbacks.cpp",
-		"/home/james/code/adl/adl/modules/__init__.py",
-		"/home/james/code/adl/adl/boards/nonvolatile/EEPROM.py",
-		"/home/james/code/adl/adl/boards/nonvolatile.tpl",
-		"/home/james/code/adl/adl/modules/time/adl-time.h",
-		"/home/james/code/adl/adl/modules/time/adl-time.cpp",
-		"/home/james/code/adl/adl/boards/builder.py",
-		"/home/james/code/adl/adl/boards/adl.tpl",
-		"/home/james/code/adl/adl/boards/nano.yapsy-plugin",
-		"/home/james/code/adl/adl/boards/duemilanove.yapsy-plugin",
-		"/home/james/code/adl/adl/devices/IR-receiver.device-plugin/IR-receiver.h",
-		"/home/james/code/adl/adl/modules/oneshot_timer/adl-oneshot-timer.h",
-		"/home/james/code/adl/adl/devices/IR-receiver.device-plugin/IR-receiver.cpp",
-		"/home/james/code/adl/adl/devices/IR-receiver.device-plugin/example.xml",
-		"/home/james/code/adl/adl/devices/IR.device-plugin/example.xml",
-		"/home/james/code/adl/adl/devices/ir.device-plugin/example.xml",
-		"/home/james/code/adl/adl/devices/alarmed-onoff.device-plugin/alarmed-onoff.cpp",
-		"/home/james/code/adl/adl/devices/rfid-rc522.device-plugin/rfid-rc522.h",
-		"/home/james/code/adl/adl/devices/rfid-rc522.device-plugin/rfid-rc522.yapsy-plugin"
+		"/home/james/Arduino/libraries/Adafruit_NeoPixel/Adafruit_NeoPixel.h"
 	],
 	"find":
 	{
-		"height": 24.0
+		"height": 22.0
 	},
 	"find_in_files":
 	{
-		"height": 104.0,
+		"height": 98.0,
 		"where_history":
 		[
 			"*.py, *.cpp, *.h, *.tpl, *.template",
@@ -785,8 +799,24 @@
 		"case_sensitive": true,
 		"find_history":
 		[
-			"rgb_tick",
-			"4095",
+			"npixels",
+			"Adafruit NeoPixel",
+			"i+0",
+			"[s_pVariableLevels]",
+			"s_pRGBFixed[i]->get",
+			"int",
+			"pControlled",
+			"buttons",
+			"BinaryOutput",
+			"My RGB Param",
+			"state",
+			"debounce",
+			"20",
+			"my_task_fn",
+			"4067Reader",
+			"4067_GND_PIN",
+			"4067_POWER_PIN",
+			"4067_PIN",
 			"BooleanParam(",
 			"BooleanParam",
 			"100",
@@ -896,23 +926,7 @@
 			"Debounced Input",
 			"Duemilanove",
 			"128",
-			"$(TARGET_EXTENSION):",
-			"$(TARGET_EXTENSION)",
-			"send_command",
-			"8):",
-			"uint8_t",
-			"format",
-			"0",
-			"CPPUNIT_ASSERT_FALSE",
-			"CPPUNIT_ASSERT(NULL == p_result);",
-			"clear",
-			"m_pixels",
-			"m_numLEDs",
-			"m_pixels",
-			"set_pixels",
-			"command_handler",
-			"pinMask",
-			"port"
+			"$(TARGET_EXTENSION):"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -946,41 +960,77 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 5,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "buttons.cpp",
+					"file": "application.cpp",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2992,
+						"buffer_size": 1852,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2925,
-								2967
+								1735,
+								1735
 							]
 						],
 						"settings":
 						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/User/Stino/Arduino.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 624.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "app/rgb-param.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 698,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								528,
+								528
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
 							"syntax": "Packages/C++/C++.sublime-syntax",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 990.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
-					"buffer": 1,
+					"buffer": 2,
 					"file": "rgb.h",
 					"semi_transient": false,
 					"settings":
@@ -992,112 +1042,93 @@
 						"selection":
 						[
 							[
-								174,
-								161
+								190,
+								190
 							]
 						],
 						"settings":
 						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
 							"syntax": "Packages/C++/C++.sublime-syntax"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
+					"buffer": 3,
 					"file": "rgb.cpp",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2167,
+						"buffer_size": 2427,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1059,
-								1059
+								1629,
+								1629
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/User/Stino/Arduino.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 632.0,
+						"translation.y": 468.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "buttons.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3077,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2743,
+								2743
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/User/Stino/Arduino.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 468.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "application.cpp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1168,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1128,
-								1128
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 90.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "buttons.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 164,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								155,
-								155
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
 					"buffer": 5,
-					"file": "app.xml",
+					"file": "neopixel-app.xml",
 					"semi_transient": false,
 					"settings":
 					{
@@ -1108,21 +1139,86 @@
 						"selection":
 						[
 							[
-								1939,
-								1939
+								3355,
+								3355
 							]
 						],
 						"settings":
 						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
 							"syntax": "Packages/XML/XML.sublime-syntax",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 690.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "buttons.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 158,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								127,
+								127
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "app/adl.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 553,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								427,
+								427
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
 					"type": "text"
 				}
 			]
@@ -1130,7 +1226,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 24.0
+		"height": 22.0
 	},
 	"input":
 	{
@@ -1179,7 +1275,7 @@
 	"project": "cryptology-rgb-puzzle.sublime-project",
 	"replace":
 	{
-		"height": 44.0
+		"height": 40.0
 	},
 	"save_all_on_build": true,
 	"select_file":

@@ -5,6 +5,11 @@
         A puzzle based on matching RGB LED colours
     </info>
     
+    <defines>
+        <define>PIXEL_TYPE_TLC5973 1</define>
+        <define>PIXEL_TYPE PIXEL_TYPE_TLC5973</define>
+    </defines>
+
     <devices>
         <device name="Fixed NeoPixels" type="TLC5973">
             <setting id="pin" value="5"/>
@@ -25,7 +30,6 @@
             <setting id="ontime" value="500"/>
             <setting id="offtime" value="500"/>
         </device>
-
     </devices>
 
     <parameters>

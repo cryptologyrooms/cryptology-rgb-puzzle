@@ -1,12 +1,21 @@
 /* Arduino Includes */
 
+#if (PIXEL_TYPE == NEOPIXELS)
 #include <Adafruit_NeoPixel.h>
+#endif
 
 /* ADL Includes */
 
 #include "adl.h"
 
+#if (PIXEL_TYPE == PIXEL_TYPE_NEOPIXELS)
 #include "adafruit-neopixel-adl.h"
+typedef AdafruitNeoPixelADL PixelType;
+#elif  (PIXEL_TYPE == PIXEL_TYPE_TLC5973)
+#include "TLC5973.h"
+typedef TLC5973 PixelType;
+#endif
+
 #include "binary-output.h"
 
 #include "adl-oneshot-timer.h"
@@ -59,7 +68,7 @@ void adl_custom_setup(DeviceBase * pdevices[], int ndevices, ParameterBase * ppa
 {
     (void)ndevices; (void)pparams; (void)nparams;
 
-    rgb_setup((AdafruitNeoPixelADL*)(pdevices[0]), (AdafruitNeoPixelADL*)(pdevices[1]));
+    rgb_setup((PixelType*)(pdevices[0]), (PixelType*)(pdevices[1]));
     buttons_setup((BinaryOutput*)(pdevices[2]));
 
     pinMode(RELAY_PIN, OUTPUT);
@@ -75,8 +84,8 @@ void adl_custom_loop(DeviceBase * pdevices[], int ndevices, ParameterBase * ppar
     if (s_game_running)
     {
         buttons_tick();
-        rgb_tick((RGBParam**)pparams, buttons_get_levels(), ((IntegerParam*)pparams[5])->get());
     }
+        rgb_tick((RGBParam**)pparams, buttons_get_levels(), ((IntegerParam*)pparams[5])->get());
 
     s_game_running = !match_lights((RGBParam**)pparams, buttons_get_levels());
     digitalWrite(RELAY_PIN, s_game_running ? LOW : HIGH);
