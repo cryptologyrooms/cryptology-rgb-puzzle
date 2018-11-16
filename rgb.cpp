@@ -44,9 +44,9 @@ static bool s_log_mode = false;
 static RGBParam ** s_pRGBFixed;
 
 static uint32_t s_multiplier = 0;
-static uint32_t s_brightness_table[8] = {0};
+static uint16_t s_brightness_table[8] = {0};
 
-static void update_fixed(RGBParam * pRGBFixed[5], uint32_t * p_brightness_table)
+static void update_fixed(RGBParam * pRGBFixed[5], uint16_t * p_brightness_table)
 {
     for (uint8_t i=0; i<5; i++)
     {
@@ -60,7 +60,7 @@ static void update_fixed(RGBParam * pRGBFixed[5], uint32_t * p_brightness_table)
     s_pFixed->show();
 }
 
-static void update_variable(uint8_t const * const pVariableLevels, uint32_t * p_brightness_table)
+static void update_variable(uint8_t const * const pVariableLevels, uint16_t * p_brightness_table)
 {
     for (uint8_t i=0; i<5; i++)
     {
@@ -98,7 +98,7 @@ static void update_task_fn(ADLTask& pThisTask, void * pTaskData)
 }
 static ADLTask update_task(50, update_task_fn, NULL);
 
-static void update_brightness_table(uint32_t * p_table, bool log_mode, uint32_t multiplier)
+static void update_brightness_table(uint16_t * p_table, bool log_mode, uint32_t multiplier)
 {
     if (log_mode)
     {

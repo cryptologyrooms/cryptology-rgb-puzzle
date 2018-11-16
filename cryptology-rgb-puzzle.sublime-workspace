@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"reset",
+				"s_on_reset_zero_all"
+			],
+			[
+				"p_",
+				"p_brightness_table"
+			],
+			[
+				"s_",
+				"s_log_mode"
+			],
+			[
 				"REL",
 				"RELAY_PIN"
 			],
@@ -22,10 +34,6 @@
 			[
 				"CPPUN",
 				"CPPUNIT_ASSERT_EQUAL"
-			],
-			[
-				"s_",
-				"s_mock_param1"
 			],
 			[
 				"new",
@@ -296,10 +304,6 @@
 				"state_task_fn"
 			],
 			[
-				"reset",
-				"reset_time_expired"
-			],
-			[
 				"res",
 				"reset_time_expired"
 			],
@@ -510,10 +514,6 @@
 			[
 				"exi",
 				"existing_category"
-			],
-			[
-				"f",
-				"form"
 			]
 		]
 	},
@@ -523,68 +523,73 @@
 			"file": "application.cpp",
 			"settings":
 			{
-				"buffer_size": 1852,
+				"buffer_size": 2760,
 				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "app/rgb-param.h",
-			"settings":
-			{
-				"buffer_size": 698,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "rgb.h",
-			"settings":
-			{
-				"buffer_size": 222,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "rgb.cpp",
-			"settings":
-			{
-				"buffer_size": 2427,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "buttons.cpp",
-			"settings":
-			{
-				"buffer_size": 3077,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "neopixel-app.xml",
-			"settings":
-			{
-				"buffer_size": 3355,
-				"line_ending": "Unix"
+				"line_ending": "Windows"
 			}
 		},
 		{
 			"file": "buttons.h",
 			"settings":
 			{
-				"buffer_size": 158,
+				"buffer_size": 199,
 				"encoding": "UTF-8",
-				"line_ending": "Unix"
+				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "app/adl.h",
+			"file": "application.h",
 			"settings":
 			{
-				"buffer_size": 553,
-				"line_ending": "Unix"
+				"buffer_size": 116,
+				"encoding": "UTF-8",
+				"line_ending": "Windows",
+				"name": "#ifndef _APP_H_"
+			}
+		},
+		{
+			"file": "buttons.cpp",
+			"settings":
+			{
+				"buffer_size": 3822,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "tlc5973-app.xml",
+			"settings":
+			{
+				"buffer_size": 3978,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "neopixel-app.xml",
+			"settings":
+			{
+				"buffer_size": 3986,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "rgb.cpp",
+			"settings":
+			{
+				"buffer_size": 3701,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "rgb.h",
+			"settings":
+			{
+				"buffer_size": 217,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
 			}
 		}
 	],
@@ -628,10 +633,19 @@
 	},
 	"expanded_folders":
 	[
-		"/home/james/code/cryptology/cryptology-rgb-puzzle"
+		"/C/Users/jfowkes/Documents/code/cryptology-rgb-puzzle"
 	],
 	"file_history":
 	[
+		"/C/Users/jfowkes/Documents/code/cryptology-rgb-puzzle/buttons.h",
+		"/C/Users/jfowkes/Documents/code/cryptology-rgb-puzzle/buttons.cpp",
+		"/C/Users/jfowkes/Documents/code/cryptology-rgb-puzzle/application.cpp",
+		"/C/Users/jfowkes/Documents/code/cryptology-rgb-puzzle/app/rgb-param.h",
+		"/C/Users/jfowkes/Documents/code/cryptology-rgb-puzzle/rgb.h",
+		"/C/Users/jfowkes/Documents/code/cryptology-rgb-puzzle/rgb.cpp",
+		"/C/Users/jfowkes/Documents/code/cryptology-rgb-puzzle/neopixel-app.xml",
+		"/C/Users/jfowkes/Documents/code/cryptology-rgb-puzzle/tlc5973-app.xml",
+		"/C/Users/jfowkes/Documents/code/cryptology-rgb-puzzle/app/adl.h",
 		"/home/james/code/cryptology/cryptology-rgb-puzzle/tlc5973-app.xml",
 		"/home/james/code/cryptology/cryptology-rgb-puzzle/app/rgb.cpp",
 		"/home/james/code/Libs/utility/util_macros.h",
@@ -750,20 +764,11 @@
 		"/home/james/code/adl/adl/parameters/generic_parameter.py",
 		"/home/james/code/adl/adl/boards/uno.yapsy-plugin",
 		"/home/james/code/adl/adl/types.py",
-		"/home/james/code/adl/adl/modules/generic_module.py",
-		"/home/james/code/adl/adl/boards/serial/serial0.py",
-		"/home/james/code/adl/adl/boards/__init__.py",
-		"/home/james/code/adl/adl/__init__.py",
-		"/home/james/code/adl/adl/devices/adafruit-ads1x15.device-plugin/adafruit_ads1x15.py",
-		"/home/james/code/adl/adl/boards/duemilanove.py",
-		"/home/james/code/adl/adl/adl_code/adl-util-limited-range-int.h",
-		"/home/james/code/adl/adl/parameters/integer/example.xml",
-		"/home/james/code/adl/example.xml",
-		"/home/james/Arduino/libraries/Adafruit_NeoPixel/Adafruit_NeoPixel.h"
+		"/home/james/code/adl/adl/modules/generic_module.py"
 	],
 	"find":
 	{
-		"height": 22.0
+		"height": 24.0
 	},
 	"find_in_files":
 	{
@@ -799,6 +804,11 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"15",
+			"multiplier",
+			"(maximum",
+			"= ",
+			"update_log_tables",
 			"npixels",
 			"Adafruit NeoPixel",
 			"i+0",
@@ -921,12 +931,7 @@
 			"pixels",
 			"s_info_pixels",
 			"pixels",
-			"s_info_pixels",
-			"adl_custom_setup",
-			"Debounced Input",
-			"Duemilanove",
-			"128",
-			"$(TARGET_EXTENSION):"
+			"s_info_pixels"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -960,7 +965,7 @@
 	"groups":
 	[
 		{
-			"selected": 5,
+			"selected": 4,
 			"sheets":
 			[
 				{
@@ -969,58 +974,79 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1852,
+						"buffer_size": 2760,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1735,
-								1735
+								1630,
+								1630
 							]
 						],
 						"settings":
 						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/User/Stino/Arduino.tmLanguage",
+							"syntax": "Packages/C++/C++.sublime-syntax",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 624.0,
+						"translation.y": 960.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "buttons.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 199,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								155,
+								174
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 4,
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "app/rgb-param.h",
+					"buffer": 2,
+					"file": "application.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 698,
+						"buffer_size": 116,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								528,
-								528
+								76,
+								95
 							]
 						],
 						"settings":
 						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"auto_name": "#ifndef _APP_H_",
+							"syntax": "Packages/C++/C++.sublime-syntax"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1030,124 +1056,54 @@
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "rgb.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 222,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								190,
-								190
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
 					"buffer": 3,
-					"file": "rgb.cpp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2427,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1629,
-								1629
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/User/Stino/Arduino.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 468.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
 					"file": "buttons.cpp",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3077,
+						"buffer_size": 3822,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2743,
-								2743
+								399,
+								399
 							]
 						],
 						"settings":
 						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/User/Stino/Arduino.tmLanguage",
+							"syntax": "Packages/C++/C++.sublime-syntax",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 468.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "neopixel-app.xml",
+					"buffer": 4,
+					"file": "tlc5973-app.xml",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3355,
+						"buffer_size": 3978,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3355,
-								3355
+								271,
+								271
 							]
 						],
 						"settings":
 						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
 							"syntax": "Packages/XML/XML.sublime-syntax",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
@@ -1160,31 +1116,60 @@
 					"type": "text"
 				},
 				{
-					"buffer": 6,
-					"file": "buttons.h",
+					"buffer": 5,
+					"file": "neopixel-app.xml",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 158,
+						"buffer_size": 3986,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								127,
-								127
+								279,
+								279
 							]
 						],
 						"settings":
 						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax"
+							"syntax": "Packages/XML/XML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "rgb.cpp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3701,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3446,
+								3446
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1730.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 7,
@@ -1192,29 +1177,26 @@
 				},
 				{
 					"buffer": 7,
-					"file": "app/adl.h",
+					"file": "rgb.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 553,
+						"buffer_size": 217,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								427,
-								427
+								208,
+								208
 							]
 						],
 						"settings":
 						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
 							"syntax": "Packages/C++/C++.sublime-syntax"
 						},
-						"translation.x": 0.0,
+						"translation.x": 1.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
@@ -1226,11 +1208,11 @@
 	],
 	"incremental_find":
 	{
-		"height": 22.0
+		"height": 24.0
 	},
 	"input":
 	{
-		"height": 34.0
+		"height": 36.0
 	},
 	"layout":
 	{
@@ -1275,7 +1257,7 @@
 	"project": "cryptology-rgb-puzzle.sublime-project",
 	"replace":
 	{
-		"height": 40.0
+		"height": 44.0
 	},
 	"save_all_on_build": true,
 	"select_file":

@@ -110,6 +110,6 @@
         <log_module>RGB</log_module>
     </logging>
 
-    <adl protocol="url"></adl>
+    <adl protocol="url" buffer_size="32"/>
 
 </board>
