@@ -11,11 +11,17 @@
 
 /* Application Includes */
 #include "buttons.h"
+#include "application.h"
 
 /* Defines and Typedefs */
 static const uint8_t HC4067_PIN = 7;
 static const uint8_t HC4067_POWER_PIN = 6;
 static const uint8_t HC4067_GND_PIN = 12;
+
+static const uint8_t N_RGB_BUTTONS = 15;
+static const uint8_t N_BUTTONS = N_RGB_BUTTONS+1;
+static const uint8_t MAX_BUTTON_INDEX = N_BUTTONS-1;
+static const uint8_t RESET_BOUNCER_INDEX = MAX_BUTTON_INDEX;
 
 /* Local Classes */
 class HC4067Reader : public DebounceReader
@@ -28,12 +34,13 @@ public:
 
 static uint8_t s_current_button = 0;
 
-static uint8_t s_levels[15] = {0};
+static uint8_t s_levels[N_RGB_BUTTONS] = {0};
 
 static BinaryOutput * s_pButtonSelect;
 static HC4067Reader s_HC4067Reader;
 
-static ADLDebouncer s_debouncers[15] = {
+static ADLDebouncer s_debouncers[N_RGB_BUTTONS+1] = {
+    ADLDebouncer(s_HC4067Reader, 3),
     ADLDebouncer(s_HC4067Reader, 3),
     ADLDebouncer(s_HC4067Reader, 3),
     ADLDebouncer(s_HC4067Reader, 3),
@@ -58,7 +65,7 @@ static void debouncer_task_fn(ADLTask& pThisTask, void * pTaskData)
 
     s_debouncers[s_current_button].tick();
 
-    s_current_button = s_current_button < 14 ? (s_current_button + 1) : 0;
+    s_current_button = s_current_button < N_RGB_BUTTONS ? (s_current_button + 1) : 0;
     s_pButtonSelect->set(s_current_button);
 }
 static ADLTask debouncer_task(5, debouncer_task_fn, NULL);
@@ -108,17 +115,34 @@ void buttons_tick()
 {
     debouncer_task.run();
     //debug_task.run();
-    for(int i=0; i<15; i++)
+    for (uint8_t rgb_set=0; rgb_set<5; rgb_set++)
     {
-        if (s_debouncers[i].check_high_and_clear())
+        if (!app_get_rgb_matched(rgb_set))
         {
-            adl_logln(LOG_BUT, "Button %d pressed", i);
-            incrementwithrollover(s_levels[i], 7);
+            for(int i=0; i<N_RGB_BUTTONS; i++)
+            {
+                if (s_debouncers[i].check_high_and_clear())
+                {
+                    adl_logln(LOG_BUT, "Button %d pressed", i);
+                    incrementwithrollover(s_levels[i], 7);
+                }
+            }
         }
+    }
+    if (s_debouncers[RESET_BOUNCER_INDEX].check_high_and_clear())
+    {
+        app_reset_rgb();
     }
 }
 
 uint8_t const * buttons_get_levels()
 {
     return s_levels;
+}
+
+void buttons_reset_level(uint8_t level)
+{
+    s_levels[(level*3)+0] = 0;
+    s_levels[(level*3)+1] = 0;
+    s_levels[(level*3)+2] = 0;
 }

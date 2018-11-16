@@ -79,6 +79,16 @@
             <setting id="max" value="585"/>
             <setting id="use_eeprom" value="true"/>
         </parameter>
+        <parameter name="RGB5" type="RGB">
+            <setting id="limit" value="4095"/>
+            <setting id="clip" value="true"/>
+            <setting id="r_default" value="0"/>
+            <setting id="g_default" value="256"/>
+            <setting id="b_default" value="0"/>
+            <setting id="use_eeprom" value="true"/>
+        </parameter>
+        <parameter name="ResetBehaviour" type="Boolean"/>
+        <parameter name="BrightnessBehaviour" type="Boolean"/>
     </parameters>
 
     <modules>
@@ -88,6 +98,7 @@
     
     <custom_code>
         <file>application.cpp</file>
+        <file>application.h</file>
         <file>buttons.cpp</file>
         <file>buttons.h</file>
         <file>rgb.cpp</file>

@@ -4,5 +4,6 @@
 void buttons_setup(BinaryOutput * pButtonSelect);
 void buttons_tick();
 uint8_t const * buttons_get_levels();
+void buttons_reset_level(uint8_t level);
 
 #endif

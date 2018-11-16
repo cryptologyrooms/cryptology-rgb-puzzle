@@ -22,6 +22,7 @@ typedef TLC5973 PixelType;
 #include "adl-oneshot-task.h"
 #include "adl-task.h"
 
+#include "boolean-param.h"
 #include "integer-param.h"
 #include "rgb-param.h"
 
@@ -33,7 +34,11 @@ typedef TLC5973 PixelType;
 /* Defines, typedefs, constants */
 
 static const uint8_t RELAY_PIN = 2;
+
+/* Local Variables */
 static bool s_game_running = true;
+static bool s_on_reset_zero_all;
+static bool s_matched [5] = {false};
 
 /* Private Functions */
 
@@ -48,18 +53,37 @@ static ADLTask my_task(5000, my_task_fn, NULL);
 
 static bool match_lights(RGBParam * pRGBFixed[5], uint8_t const * const pVariableLevels)
 {
+    bool all_matched = true;
     for(uint8_t i=0; i<5; i++)
     {
+        s_matched[i] = true;
         for(uint8_t j=0; j<3; j++)
         {
             if (pRGBFixed[i]->get((eRGB)j) != pVariableLevels[(i*3)+j])
             {
-                return false;
+                s_matched[i] = false;
+                all_matched = false;
             }
         }
     }
 
-    return true;
+    return all_matched;
+}
+
+void app_reset_rgb()
+{
+    for (uint8_t i=0; i<5;i++)
+    {
+        if (s_on_reset_zero_all || !s_matched[i])
+        {
+            buttons_reset_level(i);
+        }
+    }
+}
+
+bool app_get_rgb_matched(uint8_t i)
+{
+    return s_matched[i];
 }
 
 /* ADL Functions */
@@ -81,11 +105,21 @@ void adl_custom_loop(DeviceBase * pdevices[], int ndevices, ParameterBase * ppar
     (void)pdevices; (void)ndevices; (void)nparams;
     my_task.run();
 
+    int32_t rgb_multiplier = (int32_t)((IntegerParam*)pparams[5])->get();
+    s_on_reset_zero_all = ((BooleanParam*)pparams[7])->get();
+    bool nonlinear_brightness = ((BooleanParam*)pparams[8])->get();
+
     if (s_game_running)
     {
         buttons_tick();
     }
-        rgb_tick((RGBParam**)pparams, buttons_get_levels(), ((IntegerParam*)pparams[5])->get());
+
+    rgb_tick(
+        (RGBParam**)pparams,
+        buttons_get_levels(),
+        rgb_multiplier,
+        nonlinear_brightness
+    );
 
     s_game_running = !match_lights((RGBParam**)pparams, buttons_get_levels());
     digitalWrite(RELAY_PIN, s_game_running ? LOW : HIGH);
