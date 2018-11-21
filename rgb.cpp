@@ -33,6 +33,7 @@ typedef TLC5973 PixelType;
 
 /* Application Includes */
 
+#include "application.h"
 #include "rgb.h"
 
 /* Local Objects and Variables */
@@ -41,21 +42,53 @@ static PixelType * s_pFixed;
 static PixelType * s_pVariable;
 static uint8_t const * s_pVariableLevels;
 static bool s_nonlinear = false;
+
 static RGBParam ** s_pRGBFixed;
+static RGBParam *s_pRGBFinish;
 
 static uint32_t s_multiplier = 0;
 static uint16_t s_brightness_table[8] = {0};
+
+static const uint8_t FADER_MAX = 250;
+static uint8_t s_fader = 0;
+static bool s_fade_up = false;
+
+static void update_fader()
+{
+    if (s_fade_up)
+    {
+        incrementwithlimit(s_fader, FADER_MAX);
+        s_fade_up = (s_fader < FADER_MAX);
+    }
+    else
+    {
+        decrementwithlimit(s_fader, 0);
+        s_fade_up = (s_fader == 0);
+    }
+}
 
 static void update_fixed(RGBParam * pRGBFixed[5], uint16_t * p_brightness_table)
 {
     for (uint8_t i=0; i<5; i++)
     {
-        s_pFixed->setPixelColor(
-            i,
-            p_brightness_table[pRGBFixed[i]->get(eR)] / PIXEL_DIVIDER,
-            p_brightness_table[pRGBFixed[i]->get(eG)] / PIXEL_DIVIDER,
-            p_brightness_table[pRGBFixed[i]->get(eB)] / PIXEL_DIVIDER
-        );
+        if (!app_get_rgb_matched(i))
+        {
+            s_pFixed->setPixelColor(
+                i,
+                p_brightness_table[pRGBFixed[i]->get(eR)] / PIXEL_DIVIDER,
+                p_brightness_table[pRGBFixed[i]->get(eG)] / PIXEL_DIVIDER,
+                p_brightness_table[pRGBFixed[i]->get(eB)] / PIXEL_DIVIDER
+            );
+        }
+        else
+        {
+            s_pFixed->setPixelColor(
+                i,
+                (s_pRGBFinish->get(eR) * s_fader) / (FADER_MAX * PIXEL_DIVIDER),
+                (s_pRGBFinish->get(eG) * s_fader) / (FADER_MAX * PIXEL_DIVIDER),
+                (s_pRGBFinish->get(eB) * s_fader) / (FADER_MAX * PIXEL_DIVIDER)
+            );   
+        }
     }
     s_pFixed->show();
 }
@@ -99,8 +132,9 @@ static void update_task_fn(ADLTask& pThisTask, void * pTaskData)
     (void)pTaskData;
     update_fixed(s_pRGBFixed, s_brightness_table);
     update_variable(s_pVariableLevels, s_brightness_table);
+    update_fader();
 }
-static ADLTask update_task(50, update_task_fn, NULL);
+static ADLTask update_task(10, update_task_fn, NULL);
 
 static void update_brightness_table(uint16_t * p_table, uint32_t multiplier, bool nonlinear_brightness)
 {
@@ -127,10 +161,13 @@ static void update_brightness_table(uint16_t * p_table, uint32_t multiplier, boo
 
 /* Public Functions */
 
-void rgb_setup(PixelType * pFixed, PixelType * pVariable, uint32_t multiplier, bool nonlinear_brightness)
+void rgb_setup(PixelType * pFixed, PixelType * pVariable, RGBParam * pRGBFinish, uint32_t multiplier, bool nonlinear_brightness)
 {
     s_pFixed = pFixed;
     s_pVariable = pVariable;
+
+    s_pRGBFinish = pRGBFinish;
+
     s_multiplier = multiplier;
     s_nonlinear = nonlinear_brightness;
     update_brightness_table(s_brightness_table, s_multiplier, nonlinear_brightness);

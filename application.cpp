@@ -95,12 +95,13 @@ bool app_get_rgb_matched(uint8_t i)
 void adl_custom_setup(DeviceBase * pdevices[], int ndevices, ParameterBase * pparams[], int nparams)
 {
     (void)ndevices; (void)pparams; (void)nparams;
-
-    s_pFakeButtonParam = (IntegerParam*)pparams[9];
+    
     int32_t rgb_multiplier = (int32_t)((IntegerParam*)pparams[5])->get();
+    RGBParam * pRGBFinish = (RGBParam*)pparams[6];
     bool nonlinear_brightness = ((BooleanParam*)pparams[8])->get();
+    s_pFakeButtonParam = (IntegerParam*)pparams[9];
 
-    rgb_setup((PixelType*)(pdevices[0]), (PixelType*)(pdevices[1]), rgb_multiplier, nonlinear_brightness);
+    rgb_setup((PixelType*)(pdevices[0]), (PixelType*)(pdevices[1]), pRGBFinish, rgb_multiplier, nonlinear_brightness);
     buttons_setup((BinaryOutput*)(pdevices[2]));
 
     pinMode(RELAY_PIN, OUTPUT);

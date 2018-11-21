@@ -79,7 +79,7 @@
             <setting id="max" value="585"/>
             <setting id="use_eeprom" value="true"/>
         </parameter>
-        <parameter name="RGB5" type="RGB">
+        <parameter name="FinishRGB" type="RGB">
             <setting id="limit" value="4095"/>
             <setting id="clip" value="true"/>
             <setting id="r_default" value="0"/>
