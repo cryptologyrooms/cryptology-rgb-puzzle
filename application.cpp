@@ -1,6 +1,9 @@
 /* Arduino Includes */
 
-#if (PIXEL_TYPE == NEOPIXELS)
+#include <Arduino.h>
+#include "adl-defs.h"
+
+#if (PIXEL_TYPE == PIXEL_TYPE_NEOPIXELS)
 #include <Adafruit_NeoPixel.h>
 #endif
 
@@ -39,6 +42,7 @@ static const uint8_t RELAY_PIN = 2;
 static bool s_game_running = true;
 static bool s_on_reset_zero_all;
 static bool s_matched [5] = {false};
+static IntegerParam* s_pFakeButtonParam = NULL;
 
 /* Private Functions */
 
@@ -92,26 +96,38 @@ void adl_custom_setup(DeviceBase * pdevices[], int ndevices, ParameterBase * ppa
 {
     (void)ndevices; (void)pparams; (void)nparams;
 
-    rgb_setup((PixelType*)(pdevices[0]), (PixelType*)(pdevices[1]));
+    s_pFakeButtonParam = (IntegerParam*)pparams[9];
+    int32_t rgb_multiplier = (int32_t)((IntegerParam*)pparams[5])->get();
+    bool nonlinear_brightness = ((BooleanParam*)pparams[8])->get();
+
+    rgb_setup((PixelType*)(pdevices[0]), (PixelType*)(pdevices[1]), rgb_multiplier, nonlinear_brightness);
     buttons_setup((BinaryOutput*)(pdevices[2]));
 
     pinMode(RELAY_PIN, OUTPUT);
 
     my_task.start();
+
+    s_pFakeButtonParam->set(0xFFFF);
 }
 
 void adl_custom_loop(DeviceBase * pdevices[], int ndevices, ParameterBase * pparams[], int nparams)
 {
+    
+
     (void)pdevices; (void)ndevices; (void)nparams;
     my_task.run();
 
     int32_t rgb_multiplier = (int32_t)((IntegerParam*)pparams[5])->get();
+
     s_on_reset_zero_all = ((BooleanParam*)pparams[7])->get();
+    
     bool nonlinear_brightness = ((BooleanParam*)pparams[8])->get();
+
+    int32_t fake_button = s_pFakeButtonParam->get();
 
     if (s_game_running)
     {
-        buttons_tick();
+        buttons_tick(fake_button);
     }
 
     rgb_tick(
@@ -123,4 +139,6 @@ void adl_custom_loop(DeviceBase * pdevices[], int ndevices, ParameterBase * ppar
 
     s_game_running = !match_lights((RGBParam**)pparams, buttons_get_levels());
     digitalWrite(RELAY_PIN, s_game_running ? LOW : HIGH);
+
+    s_pFakeButtonParam->set(0xFFFF);
 }

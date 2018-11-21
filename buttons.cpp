@@ -40,22 +40,22 @@ static BinaryOutput * s_pButtonSelect;
 static HC4067Reader s_HC4067Reader;
 
 static ADLDebouncer s_debouncers[N_RGB_BUTTONS+1] = {
-    ADLDebouncer(s_HC4067Reader, 3),
-    ADLDebouncer(s_HC4067Reader, 3),
-    ADLDebouncer(s_HC4067Reader, 3),
-    ADLDebouncer(s_HC4067Reader, 3),
-    ADLDebouncer(s_HC4067Reader, 3),
-    ADLDebouncer(s_HC4067Reader, 3),
-    ADLDebouncer(s_HC4067Reader, 3),
-    ADLDebouncer(s_HC4067Reader, 3),
-    ADLDebouncer(s_HC4067Reader, 3),
-    ADLDebouncer(s_HC4067Reader, 3),
-    ADLDebouncer(s_HC4067Reader, 3),
-    ADLDebouncer(s_HC4067Reader, 3),
-    ADLDebouncer(s_HC4067Reader, 3),
-    ADLDebouncer(s_HC4067Reader, 3),
-    ADLDebouncer(s_HC4067Reader, 3),
-    ADLDebouncer(s_HC4067Reader, 3)
+    ADLDebouncer(s_HC4067Reader, 1),
+    ADLDebouncer(s_HC4067Reader, 1),
+    ADLDebouncer(s_HC4067Reader, 1),
+    ADLDebouncer(s_HC4067Reader, 1),
+    ADLDebouncer(s_HC4067Reader, 1),
+    ADLDebouncer(s_HC4067Reader, 1),
+    ADLDebouncer(s_HC4067Reader, 1),
+    ADLDebouncer(s_HC4067Reader, 1),
+    ADLDebouncer(s_HC4067Reader, 1),
+    ADLDebouncer(s_HC4067Reader, 1),
+    ADLDebouncer(s_HC4067Reader, 1),
+    ADLDebouncer(s_HC4067Reader, 1),
+    ADLDebouncer(s_HC4067Reader, 1),
+    ADLDebouncer(s_HC4067Reader, 1),
+    ADLDebouncer(s_HC4067Reader, 1),
+    ADLDebouncer(s_HC4067Reader, 1)
 };
 
 static void debouncer_task_fn(ADLTask& pThisTask, void * pTaskData)
@@ -111,25 +111,22 @@ void buttons_setup(BinaryOutput * pButtonSelect)
     pinMode(HC4067_PIN, INPUT_PULLUP);
 }
 
-void buttons_tick()
+void buttons_tick(int32_t fake_button)
 {
     debouncer_task.run();
     //debug_task.run();
-    for (uint8_t rgb_set=0; rgb_set<5; rgb_set++)
+    for(uint8_t i=0; i<N_RGB_BUTTONS; i++)
     {
-        if (!app_get_rgb_matched(rgb_set))
+        if (!app_get_rgb_matched(i/3))
         {
-            for(int i=0; i<N_RGB_BUTTONS; i++)
+            if ((fake_button == i) || s_debouncers[i].check_high_and_clear())
             {
-                if (s_debouncers[i].check_high_and_clear())
-                {
-                    adl_logln(LOG_BUT, "Button %d pressed", i);
-                    incrementwithrollover(s_levels[i], 7);
-                }
+                adl_logln(LOG_BUT, "Button %d pressed", i);
+                incrementwithrollover(s_levels[i], 7);
             }
         }
     }
-    if (s_debouncers[RESET_BOUNCER_INDEX].check_high_and_clear())
+    if ((fake_button == RESET_BOUNCER_INDEX) || s_debouncers[RESET_BOUNCER_INDEX].check_high_and_clear())
     {
         app_reset_rgb();
     }

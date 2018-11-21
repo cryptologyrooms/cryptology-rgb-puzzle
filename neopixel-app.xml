@@ -11,14 +11,14 @@
     </defines>
     
     <devices>
-        <device name="Fixed NeoPixels" type="TLC5973">
+        <device name="Fixed NeoPixels" type="Adafruit NeoPixel">
             <setting id="pin" value="5"/>
-            <setting id="num_leds" value="5"/>
+            <setting id="npixels" value="5"/>
         </device>
 
-        <device name="Variable NeoPixels" type="TLC5973">
+        <device name="Variable NeoPixels" type="Adafruit NeoPixel">
             <setting id="pin" value="4"/>
-            <setting id="num_leds" value="5"/>
+            <setting id="npixels" value="5"/>
         </device>
 
         <device name="Binary Output" type="Binary Output">
@@ -89,6 +89,7 @@
         </parameter>
         <parameter name="ResetBehaviour" type="Boolean"/>
         <parameter name="BrightnessBehaviour" type="Boolean"/>
+        <parameter name="FakeButtonPress" type="Integer"/>
     </parameters>
 
     <modules>
@@ -110,6 +111,6 @@
         <log_module>RGB</log_module>
     </logging>
 
-    <adl protocol="url"></adl>
+    <adl protocol="url" buffer_size="32"></adl>
 
 </board>

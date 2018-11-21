@@ -40,7 +40,7 @@ typedef TLC5973 PixelType;
 static PixelType * s_pFixed;
 static PixelType * s_pVariable;
 static uint8_t const * s_pVariableLevels;
-static bool s_log_mode = false;
+static bool s_nonlinear = false;
 static RGBParam ** s_pRGBFixed;
 
 static uint32_t s_multiplier = 0;
@@ -86,6 +86,10 @@ static void debug_task_fn(ADLTask& pThisTask, void * pTaskData)
             s_pVariableLevels[(i*3)+0], s_pVariableLevels[(i*3)+1], s_pVariableLevels[(i*3)+2]
         );
     }
+    adl_logln(LOG_RGB, "Table: %" PRIu16 ", %" PRIu16 ", %" PRIu16 ", %" PRIu16 ", %" PRIu16 ", %" PRIu16 ", %" PRIu16 ", %" PRIu16,
+        s_brightness_table[0], s_brightness_table[1], s_brightness_table[2], s_brightness_table[3],
+        s_brightness_table[4], s_brightness_table[5], s_brightness_table[6], s_brightness_table[7]
+    );
 }
 static ADLTask debug_task(2000, debug_task_fn, NULL);
 
@@ -98,9 +102,9 @@ static void update_task_fn(ADLTask& pThisTask, void * pTaskData)
 }
 static ADLTask update_task(50, update_task_fn, NULL);
 
-static void update_brightness_table(uint16_t * p_table, bool log_mode, uint32_t multiplier)
+static void update_brightness_table(uint16_t * p_table, uint32_t multiplier, bool nonlinear_brightness)
 {
-    if (log_mode)
+    if (nonlinear_brightness)
     {
         uint32_t maximum = 7*multiplier;
         p_table[0] = (maximum * 0) / 1000;
@@ -123,21 +127,25 @@ static void update_brightness_table(uint16_t * p_table, bool log_mode, uint32_t 
 
 /* Public Functions */
 
-void rgb_setup(PixelType * pFixed, PixelType * pVariable)
+void rgb_setup(PixelType * pFixed, PixelType * pVariable, uint32_t multiplier, bool nonlinear_brightness)
 {
     s_pFixed = pFixed;
     s_pVariable = pVariable;
+    s_multiplier = multiplier;
+    s_nonlinear = nonlinear_brightness;
+    update_brightness_table(s_brightness_table, s_multiplier, nonlinear_brightness);
 }
 
-void rgb_tick(RGBParam * pRGBFixed[5], uint8_t const * const pVariableLevels, uint32_t multiplier, bool log_mode)
+void rgb_tick(RGBParam * pRGBFixed[5], uint8_t const * const pVariableLevels, uint32_t multiplier, bool nonlinear_brightness)
 {
     s_pRGBFixed = pRGBFixed;
     s_pVariableLevels = pVariableLevels;
 
-    if (s_multiplier != multiplier)
+    if ((s_multiplier != multiplier) || (s_nonlinear != nonlinear_brightness))
     {
         s_multiplier = multiplier;
-        update_brightness_table(s_brightness_table, log_mode, s_multiplier);
+        s_nonlinear = nonlinear_brightness;
+        update_brightness_table(s_brightness_table, s_multiplier, nonlinear_brightness);
     }
     
     debug_task.run();
