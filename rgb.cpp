@@ -49,8 +49,8 @@ static RGBParam *s_pRGBFinish;
 static uint32_t s_multiplier = 0;
 static uint16_t s_brightness_table[8] = {0};
 
-static const uint8_t FADER_MAX = 250;
-static uint8_t s_fader = 0;
+static const uint32_t FADER_MAX = 250;
+static uint32_t s_fader = 0;
 static bool s_fade_up = false;
 
 static void update_fader()
@@ -97,12 +97,24 @@ static void update_variable(uint8_t const * const pVariableLevels, uint16_t * p_
 {
     for (uint8_t i=0; i<5; i++)
     {
-        s_pVariable->setPixelColor(
-            i,
-            p_brightness_table[pVariableLevels[(i*3)+0]] / PIXEL_DIVIDER,
-            p_brightness_table[pVariableLevels[(i*3)+1]] / PIXEL_DIVIDER,
-            p_brightness_table[pVariableLevels[(i*3)+2]] / PIXEL_DIVIDER
-        );
+        if (!app_get_rgb_matched(i))
+        {
+            s_pVariable->setPixelColor(
+                i,
+                p_brightness_table[pVariableLevels[(i*3)+0]] / PIXEL_DIVIDER,
+                p_brightness_table[pVariableLevels[(i*3)+1]] / PIXEL_DIVIDER,
+                p_brightness_table[pVariableLevels[(i*3)+2]] / PIXEL_DIVIDER
+            );
+        }
+        else
+        {
+            s_pVariable->setPixelColor(
+                i,
+                (s_pRGBFinish->get(eR) * s_fader) / (FADER_MAX * PIXEL_DIVIDER),
+                (s_pRGBFinish->get(eG) * s_fader) / (FADER_MAX * PIXEL_DIVIDER),
+                (s_pRGBFinish->get(eB) * s_fader) / (FADER_MAX * PIXEL_DIVIDER)
+            );   
+        }
     }
     s_pVariable->show();
 }
@@ -119,10 +131,6 @@ static void debug_task_fn(ADLTask& pThisTask, void * pTaskData)
             s_pVariableLevels[(i*3)+0], s_pVariableLevels[(i*3)+1], s_pVariableLevels[(i*3)+2]
         );
     }
-    adl_logln(LOG_RGB, "Table: %" PRIu16 ", %" PRIu16 ", %" PRIu16 ", %" PRIu16 ", %" PRIu16 ", %" PRIu16 ", %" PRIu16 ", %" PRIu16,
-        s_brightness_table[0], s_brightness_table[1], s_brightness_table[2], s_brightness_table[3],
-        s_brightness_table[4], s_brightness_table[5], s_brightness_table[6], s_brightness_table[7]
-    );
 }
 static ADLTask debug_task(2000, debug_task_fn, NULL);
 
