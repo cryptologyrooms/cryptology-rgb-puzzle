@@ -73,10 +73,10 @@
             <setting id="b_default" value="0"/>
             <setting id="use_eeprom" value="true"/>
         </parameter>
-        <parameter name="Step" type="Integer">
+        <parameter name="Maximum" type="Integer">
             <setting id="clip" value="false"/>
             <setting id="min" value="0"/>
-            <setting id="max" value="585"/>
+            <setting id="max" value="4095"/>
             <setting id="use_eeprom" value="true"/>
         </parameter>
         <parameter name="FinishRGB" type="RGB">
@@ -89,6 +89,14 @@
         </parameter>
         <parameter name="ResetBehaviour" type="Boolean"/>
         <parameter name="BrightnessBehaviour" type="Boolean"/>
+        <parameter name="NumSteps" type="RGB">
+            <setting id="limit" value="4095"/>
+            <setting id="clip" value="true"/>
+            <setting id="r_default" value="0"/>
+            <setting id="g_default" value="256"/>
+            <setting id="b_default" value="0"/>
+            <setting id="use_eeprom" value="true"/>
+        </parameter>
         <parameter name="FakeButtonPress" type="Integer"/>
     </parameters>
 
@@ -104,6 +112,8 @@
         <file>buttons.h</file>
         <file>rgb.cpp</file>
         <file>rgb.h</file>
+        <file>nonlinear.cpp</file>
+        <file>nonlinear.h</file>
     </custom_code>
 
     <logging>

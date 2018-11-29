@@ -35,6 +35,11 @@ typedef TLC5973 PixelType;
 
 #include "application.h"
 #include "rgb.h"
+#include "nonlinear.h"
+
+/* Defines, typedefs, constants */
+
+static const uint32_t FADER_MAX = 250;
 
 /* Local Objects and Variables */
 
@@ -49,7 +54,6 @@ static RGBParam *s_pRGBFinish;
 static uint32_t s_multiplier = 0;
 static uint16_t s_brightness_table[8] = {0};
 
-static const uint32_t FADER_MAX = 250;
 static uint32_t s_fader = 0;
 static bool s_fade_up = false;
 
@@ -144,23 +148,15 @@ static void update_task_fn(ADLTask& pThisTask, void * pTaskData)
 }
 static ADLTask update_task(10, update_task_fn, NULL);
 
-static void update_brightness_table(uint16_t * p_table, uint32_t multiplier, bool nonlinear_brightness)
+static void update_brightness_table(uint16_t * p_table, uint32_t multiplier, bool nonlinear_brightness, uint8_t nsteps)
 {
     if (nonlinear_brightness)
     {
-        uint32_t maximum = 7*multiplier;
-        p_table[0] = (maximum * 0) / 1000;
-        p_table[1] = (maximum * 20) / 1000;
-        p_table[2] = (maximum * 82) / 1000;
-        p_table[3] = (maximum * 184) / 1000;
-        p_table[4] = (maximum * 327) / 1000;
-        p_table[5] = (maximum * 510) / 1000;
-        p_table[6] = (maximum * 735) / 1000;
-        p_table[7] = maximum;
+        update_nonlinear_table(p_table, multiplier, nsteps);
     }
     else
     {
-        for (uint8_t i = 0; i<8; i++)
+        for (uint8_t i = 0; i<nsteps; i++)
         {
             p_table[i] = multiplier*i;
         }
@@ -169,7 +165,7 @@ static void update_brightness_table(uint16_t * p_table, uint32_t multiplier, boo
 
 /* Public Functions */
 
-void rgb_setup(PixelType * pFixed, PixelType * pVariable, RGBParam * pRGBFinish, uint32_t multiplier, bool nonlinear_brightness)
+void rgb_setup(PixelType * pFixed, PixelType * pVariable, RGBParam * pRGBFinish, uint32_t multiplier, bool nonlinear_brightness, uint8_t nsteps)
 {
     s_pFixed = pFixed;
     s_pVariable = pVariable;
@@ -178,10 +174,10 @@ void rgb_setup(PixelType * pFixed, PixelType * pVariable, RGBParam * pRGBFinish,
 
     s_multiplier = multiplier;
     s_nonlinear = nonlinear_brightness;
-    update_brightness_table(s_brightness_table, s_multiplier, nonlinear_brightness);
+    update_brightness_table(s_brightness_table, s_multiplier, nonlinear_brightness, nsteps);
 }
 
-void rgb_tick(RGBParam * pRGBFixed[5], uint8_t const * const pVariableLevels, uint32_t multiplier, bool nonlinear_brightness)
+void rgb_tick(RGBParam * pRGBFixed[5], uint8_t const * const pVariableLevels, uint32_t multiplier, bool nonlinear_brightness, uint8_t nsteps)
 {
     s_pRGBFixed = pRGBFixed;
     s_pVariableLevels = pVariableLevels;
@@ -190,7 +186,7 @@ void rgb_tick(RGBParam * pRGBFixed[5], uint8_t const * const pVariableLevels, ui
     {
         s_multiplier = multiplier;
         s_nonlinear = nonlinear_brightness;
-        update_brightness_table(s_brightness_table, s_multiplier, nonlinear_brightness);
+        update_brightness_table(s_brightness_table, s_multiplier, nonlinear_brightness, nsteps);
     }
     
     debug_task.run();

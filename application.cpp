@@ -96,12 +96,13 @@ void adl_custom_setup(DeviceBase * pdevices[], int ndevices, ParameterBase * ppa
 {
     (void)ndevices; (void)pparams; (void)nparams;
     
-    int32_t rgb_multiplier = (int32_t)((IntegerParam*)pparams[5])->get();
+    int32_t maximum = (int32_t)((IntegerParam*)pparams[5])->get();
     RGBParam * pRGBFinish = (RGBParam*)pparams[6];
     bool nonlinear_brightness = ((BooleanParam*)pparams[8])->get();
-    s_pFakeButtonParam = (IntegerParam*)pparams[9];
+    uint8_t nsteps = (uint8_t)((IntegerParam*)pparams[9])->get();
+    s_pFakeButtonParam = (IntegerParam*)pparams[10];
 
-    rgb_setup((PixelType*)(pdevices[0]), (PixelType*)(pdevices[1]), pRGBFinish, rgb_multiplier, nonlinear_brightness);
+    rgb_setup((PixelType*)(pdevices[0]), (PixelType*)(pdevices[1]), pRGBFinish, maximum, nonlinear_brightness, nsteps);
     buttons_setup((BinaryOutput*)(pdevices[2]));
 
     pinMode(RELAY_PIN, OUTPUT);
@@ -113,17 +114,17 @@ void adl_custom_setup(DeviceBase * pdevices[], int ndevices, ParameterBase * ppa
 
 void adl_custom_loop(DeviceBase * pdevices[], int ndevices, ParameterBase * pparams[], int nparams)
 {
-    
-
     (void)pdevices; (void)ndevices; (void)nparams;
     my_task.run();
 
-    int32_t rgb_multiplier = (int32_t)((IntegerParam*)pparams[5])->get();
+    int32_t maximum = (int32_t)((IntegerParam*)pparams[5])->get();
 
     s_on_reset_zero_all = ((BooleanParam*)pparams[7])->get();
     
     bool nonlinear_brightness = ((BooleanParam*)pparams[8])->get();
 
+    uint8_t nsteps = (uint8_t)((IntegerParam*)pparams[9])->get();
+    
     int32_t fake_button = s_pFakeButtonParam->get();
 
     if (s_game_running)
@@ -134,8 +135,9 @@ void adl_custom_loop(DeviceBase * pdevices[], int ndevices, ParameterBase * ppar
     rgb_tick(
         (RGBParam**)pparams,
         buttons_get_levels(),
-        rgb_multiplier,
-        nonlinear_brightness
+        maximum,
+        nonlinear_brightness,
+        nsteps
     );
 
     s_game_running = !match_lights((RGBParam**)pparams, buttons_get_levels());
