@@ -111,7 +111,7 @@ void buttons_setup(BinaryOutput * pButtonSelect)
     pinMode(HC4067_PIN, INPUT_PULLUP);
 }
 
-void buttons_tick(int32_t fake_button)
+void buttons_tick(int32_t fake_button, uint8_t max_level)
 {
     debouncer_task.run();
     //debug_task.run();
@@ -122,7 +122,7 @@ void buttons_tick(int32_t fake_button)
             if ((fake_button == i) || s_debouncers[i].check_high_and_clear())
             {
                 adl_logln(LOG_BUT, "Button %d pressed", i);
-                incrementwithrollover(s_levels[i], 7);
+                incrementwithrollover(s_levels[i], max_level);
             }
         }
     }

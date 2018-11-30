@@ -52,6 +52,8 @@ static RGBParam ** s_pRGBFixed;
 static RGBParam *s_pRGBFinish;
 
 static uint32_t s_multiplier = 0;
+static uint8_t s_nsteps = 0;
+
 static uint16_t s_brightness_table[8] = {0};
 
 static uint32_t s_fader = 0;
@@ -163,6 +165,11 @@ static void update_brightness_table(uint16_t * p_table, uint32_t multiplier, boo
     }
 }
 
+static bool brightness_table_requires_update(uint32_t multiplier, bool nonlinear_brightness, uint8_t nsteps)
+{
+    return (s_multiplier != multiplier) || (s_nonlinear != nonlinear_brightness) || (s_nsteps != nsteps);
+}
+
 /* Public Functions */
 
 void rgb_setup(PixelType * pFixed, PixelType * pVariable, RGBParam * pRGBFinish, uint32_t multiplier, bool nonlinear_brightness, uint8_t nsteps)
@@ -182,10 +189,11 @@ void rgb_tick(RGBParam * pRGBFixed[5], uint8_t const * const pVariableLevels, ui
     s_pRGBFixed = pRGBFixed;
     s_pVariableLevels = pVariableLevels;
 
-    if ((s_multiplier != multiplier) || (s_nonlinear != nonlinear_brightness))
+    if (brightness_table_requires_update(multiplier, nonlinear_brightness, nsteps))
     {
         s_multiplier = multiplier;
         s_nonlinear = nonlinear_brightness;
+        s_nsteps = nsteps;
         update_brightness_table(s_brightness_table, s_multiplier, nonlinear_brightness, nsteps);
     }
     

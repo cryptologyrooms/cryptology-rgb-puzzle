@@ -100,6 +100,13 @@ void adl_custom_setup(DeviceBase * pdevices[], int ndevices, ParameterBase * ppa
     RGBParam * pRGBFinish = (RGBParam*)pparams[6];
     bool nonlinear_brightness = ((BooleanParam*)pparams[8])->get();
     uint8_t nsteps = (uint8_t)((IntegerParam*)pparams[9])->get();
+
+    if (nsteps < 1)
+    {
+        nsteps = 5;
+        ((IntegerParam*)pparams[9])->set(nsteps);
+    }
+
     s_pFakeButtonParam = (IntegerParam*)pparams[10];
 
     rgb_setup((PixelType*)(pdevices[0]), (PixelType*)(pdevices[1]), pRGBFinish, maximum, nonlinear_brightness, nsteps);
@@ -129,7 +136,7 @@ void adl_custom_loop(DeviceBase * pdevices[], int ndevices, ParameterBase * ppar
 
     if (s_game_running)
     {
-        buttons_tick(fake_button);
+        buttons_tick(fake_button, nsteps-1);
     }
 
     rgb_tick(

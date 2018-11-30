@@ -89,6 +89,11 @@
         </parameter>
         <parameter name="ResetBehaviour" type="Boolean"/>
         <parameter name="BrightnessBehaviour" type="Boolean"/>
+        <parameter name="NumSteps" type="Integer">
+            <setting id="limit" value="8"/>
+            <setting id="clip" value="true"/>
+            <setting id="use_eeprom" value="true"/>
+        </parameter>
         <parameter name="FakeButtonPress" type="Integer"/>
     </parameters>
 
