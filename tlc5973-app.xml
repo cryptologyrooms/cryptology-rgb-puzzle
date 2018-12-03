@@ -87,8 +87,12 @@
             <setting id="b_default" value="0"/>
             <setting id="use_eeprom" value="true"/>
         </parameter>
-        <parameter name="ResetBehaviour" type="Boolean"/>
-        <parameter name="BrightnessBehaviour" type="Boolean"/>
+        <parameter name="ResetBehaviour" type="Boolean">
+            <setting id="use_eeprom" value="true"/>
+        </parameter>
+        <parameter name="BrightnessBehaviour" type="Boolean">
+            <setting id="use_eeprom" value="true"/>
+        </parameter>
         <parameter name="NumSteps" type="Integer">
             <setting id="limit" value="8"/>
             <setting id="clip" value="true"/>

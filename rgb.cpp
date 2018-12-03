@@ -40,6 +40,7 @@ typedef TLC5973 PixelType;
 /* Defines, typedefs, constants */
 
 static const uint32_t FADER_MAX = 250;
+static const uint32_t FADER_MIN = 20;
 
 /* Local Objects and Variables */
 
@@ -55,9 +56,6 @@ static uint32_t s_multiplier = 0;
 static uint8_t s_nsteps = 0;
 
 static uint16_t s_brightness_table[8] = {0};
-
-static const uint32_t FADER_MAX = 250;
-static const uint32_t FADER_MIN = 20;
 
 static uint32_t s_fader = FADER_MIN;
 static bool s_fade_up = true;
@@ -200,6 +198,12 @@ void rgb_tick(RGBParam * pRGBFixed[5], uint8_t const * const pVariableLevels, ui
         s_nonlinear = nonlinear_brightness;
         s_nsteps = nsteps;
         update_brightness_table(s_brightness_table, s_multiplier, nonlinear_brightness, nsteps);
+        Serial.println("New table:");
+        for (uint8_t i; i < nsteps; i++)
+        {
+            Serial.print(s_brightness_table[i]);
+            Serial.print(", ");
+        }
     }
     
     debug_task.run();

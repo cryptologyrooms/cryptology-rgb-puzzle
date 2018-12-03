@@ -523,7 +523,7 @@
 			"file": "application.cpp",
 			"settings":
 			{
-				"buffer_size": 3316,
+				"buffer_size": 3558,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -540,7 +540,7 @@
 			"file": "rgb.h",
 			"settings":
 			{
-				"buffer_size": 300,
+				"buffer_size": 336,
 				"line_ending": "Unix"
 			}
 		},
@@ -548,7 +548,7 @@
 			"file": "rgb.cpp",
 			"settings":
 			{
-				"buffer_size": 5546,
+				"buffer_size": 5675,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -557,7 +557,7 @@
 			"file": "tlc5973-app.xml",
 			"settings":
 			{
-				"buffer_size": 4054,
+				"buffer_size": 4340,
 				"line_ending": "Unix"
 			}
 		},
@@ -565,7 +565,7 @@
 			"file": "buttons.cpp",
 			"settings":
 			{
-				"buffer_size": 3797,
+				"buffer_size": 3824,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -574,7 +574,7 @@
 			"file": "buttons.h",
 			"settings":
 			{
-				"buffer_size": 218,
+				"buffer_size": 237,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -628,8 +628,7 @@
 	},
 	"expanded_folders":
 	[
-		"/home/james/code/cryptology/cryptology-rgb-puzzle",
-		"/home/james/code/cryptology/cryptology-rgb-puzzle/app"
+		"/home/james/code/cryptology/cryptology-rgb-puzzle"
 	],
 	"file_history":
 	[
@@ -764,7 +763,7 @@
 	],
 	"find":
 	{
-		"height": 22.0
+		"height": 38.0
 	},
 	"find_in_files":
 	{
@@ -800,6 +799,8 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"<<<<<<<",
+			">>>>",
 			"s_brightness_table",
 			"3",
 			"npixels",
@@ -925,9 +926,7 @@
 			"s_info_pixels",
 			"pixels",
 			"s_info_pixels",
-			"adl_custom_setup",
-			"Debounced Input",
-			"Duemilanove"
+			"adl_custom_setup"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -961,7 +960,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -970,7 +969,7 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3316,
+						"buffer_size": 3558,
 						"regions":
 						{
 						},
@@ -994,7 +993,7 @@
 						"translation.y": 624.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -1036,7 +1035,7 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 300,
+						"buffer_size": 336,
 						"regions":
 						{
 						},
@@ -1067,15 +1066,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5546,
+						"buffer_size": 5675,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4598,
-								4530
+								1221,
+								1221
 							]
 						],
 						"settings":
@@ -1088,10 +1087,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2145.0,
+						"translation.y": 2301.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -1100,7 +1099,7 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4054,
+						"buffer_size": 4340,
 						"regions":
 						{
 						},
@@ -1133,7 +1132,7 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3797,
+						"buffer_size": 3824,
 						"regions":
 						{
 						},
@@ -1166,7 +1165,7 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 218,
+						"buffer_size": 237,
 						"regions":
 						{
 						},
