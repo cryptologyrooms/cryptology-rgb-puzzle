@@ -56,20 +56,25 @@ static uint8_t s_nsteps = 0;
 
 static uint16_t s_brightness_table[8] = {0};
 
-static uint32_t s_fader = 0;
-static bool s_fade_up = false;
+static const uint32_t FADER_MAX = 250;
+static const uint32_t FADER_MIN = 20;
+
+static uint32_t s_fader = FADER_MIN;
+static bool s_fade_up = true;
 
 static void update_fader()
 {
     if (s_fade_up)
     {
         incrementwithlimit(s_fader, FADER_MAX);
+        incrementwithlimit(s_fader, FADER_MAX);
         s_fade_up = (s_fader < FADER_MAX);
     }
     else
     {
-        decrementwithlimit(s_fader, 0);
-        s_fade_up = (s_fader == 0);
+        decrementwithlimit(s_fader, FADER_MIN);
+        decrementwithlimit(s_fader, FADER_MIN);
+        s_fade_up = (s_fader == FADER_MIN);
     }
 }
 
