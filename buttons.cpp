@@ -1,13 +1,13 @@
 /* ADL Includes */
 
-#include "adl.h"
+#include "raat.h"
 
 #include "binary-output.h"
-#include "adl-debouncer.h"
+#include "raat-debouncer.h"
 
-#include "adl-oneshot-timer.h"
-#include "adl-oneshot-task.h"
-#include "adl-task.h"
+#include "raat-oneshot-timer.h"
+#include "raat-oneshot-task.h"
+#include "raat-task.h"
 
 /* Application Includes */
 #include "buttons.h"
@@ -39,26 +39,26 @@ static uint8_t s_levels[N_RGB_BUTTONS] = {0};
 static BinaryOutput * s_pButtonSelect;
 static HC4067Reader s_HC4067Reader;
 
-static ADLDebouncer s_debouncers[N_RGB_BUTTONS+1] = {
-    ADLDebouncer(s_HC4067Reader, 1),
-    ADLDebouncer(s_HC4067Reader, 1),
-    ADLDebouncer(s_HC4067Reader, 1),
-    ADLDebouncer(s_HC4067Reader, 1),
-    ADLDebouncer(s_HC4067Reader, 1),
-    ADLDebouncer(s_HC4067Reader, 1),
-    ADLDebouncer(s_HC4067Reader, 1),
-    ADLDebouncer(s_HC4067Reader, 1),
-    ADLDebouncer(s_HC4067Reader, 1),
-    ADLDebouncer(s_HC4067Reader, 1),
-    ADLDebouncer(s_HC4067Reader, 1),
-    ADLDebouncer(s_HC4067Reader, 1),
-    ADLDebouncer(s_HC4067Reader, 1),
-    ADLDebouncer(s_HC4067Reader, 1),
-    ADLDebouncer(s_HC4067Reader, 1),
-    ADLDebouncer(s_HC4067Reader, 1)
+static RAATDebouncer s_debouncers[N_RGB_BUTTONS+1] = {
+    RAATDebouncer(s_HC4067Reader, 1),
+    RAATDebouncer(s_HC4067Reader, 1),
+    RAATDebouncer(s_HC4067Reader, 1),
+    RAATDebouncer(s_HC4067Reader, 1),
+    RAATDebouncer(s_HC4067Reader, 1),
+    RAATDebouncer(s_HC4067Reader, 1),
+    RAATDebouncer(s_HC4067Reader, 1),
+    RAATDebouncer(s_HC4067Reader, 1),
+    RAATDebouncer(s_HC4067Reader, 1),
+    RAATDebouncer(s_HC4067Reader, 1),
+    RAATDebouncer(s_HC4067Reader, 1),
+    RAATDebouncer(s_HC4067Reader, 1),
+    RAATDebouncer(s_HC4067Reader, 1),
+    RAATDebouncer(s_HC4067Reader, 1),
+    RAATDebouncer(s_HC4067Reader, 1),
+    RAATDebouncer(s_HC4067Reader, 1)
 };
 
-static void debouncer_task_fn(ADLTask& pThisTask, void * pTaskData)
+static void debouncer_task_fn(RAATTask& pThisTask, void * pTaskData)
 {
     (void)pThisTask;
     (void)pTaskData;
@@ -68,14 +68,14 @@ static void debouncer_task_fn(ADLTask& pThisTask, void * pTaskData)
     s_current_button = s_current_button < N_RGB_BUTTONS ? (s_current_button + 1) : 0;
     s_pButtonSelect->set(s_current_button);
 }
-static ADLTask debouncer_task(5, debouncer_task_fn, NULL);
+static RAATTask debouncer_task(5, debouncer_task_fn, NULL);
 
-/*static void debug_task_fn(ADLTask& pThisTask, void * pTaskData)
+/*static void debug_task_fn(RAATTask& pThisTask, void * pTaskData)
 {
     (void)pThisTask;
     (void)pTaskData;
 
-    adl_logln(LOG_BUT, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d",
+    raat_logln(LOG_BUT, "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d",
         s_debouncers[0].count(),
         s_debouncers[1].count(),
         s_debouncers[2].count(),
@@ -93,7 +93,7 @@ static ADLTask debouncer_task(5, debouncer_task_fn, NULL);
         s_debouncers[14].count()
     );
 }
-static ADLTask debug_task(500, debug_task_fn, NULL);*/
+static RAATTask debug_task(500, debug_task_fn, NULL);*/
 
 /* Public Functions */
 
@@ -121,7 +121,7 @@ void buttons_tick(int32_t fake_button, uint8_t max_level)
         {
             if ((fake_button == i) || s_debouncers[i].check_high_and_clear())
             {
-                adl_logln(LOG_BUT, "Button %d pressed", i);
+                raat_logln(LOG_BUT, "Button %d pressed", i);
                 incrementwithrollover(s_levels[i], max_level);
             }
         }

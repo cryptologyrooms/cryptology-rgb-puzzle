@@ -1,7 +1,7 @@
 /* Arduino Includes */
 
 #include <Arduino.h>
-#include "adl-defs.h"
+#include "raat-defs.h"
 
 #if (PIXEL_TYPE == PIXEL_TYPE_NEOPIXELS)
 #include <Adafruit_NeoPixel.h>
@@ -9,10 +9,10 @@
 
 /* ADL Includes */
 
-#include "adl.h"
+#include "raat.h"
 
 #if (PIXEL_TYPE == PIXEL_TYPE_NEOPIXELS)
-#include "adafruit-neopixel-adl.h"
+#include "adafruit-neopixel-raat.h"
 typedef AdafruitNeoPixelADL PixelType;
 #elif  (PIXEL_TYPE == PIXEL_TYPE_TLC5973)
 #include "TLC5973.h"
@@ -21,9 +21,9 @@ typedef TLC5973 PixelType;
 
 #include "binary-output.h"
 
-#include "adl-oneshot-timer.h"
-#include "adl-oneshot-task.h"
-#include "adl-task.h"
+#include "raat-oneshot-timer.h"
+#include "raat-oneshot-task.h"
+#include "raat-task.h"
 
 #include "boolean-param.h"
 #include "integer-param.h"
@@ -46,12 +46,12 @@ static IntegerParam* s_pFakeButtonParam = NULL;
 
 /* Private Functions */
 
-static void my_task_fn(ADLTask& pThisTask, void * pTaskData)
+static void my_task_fn(RAATTask& pThisTask, void * pTaskData)
 {
     (void)pThisTask;
     (void)pTaskData;
 }
-static ADLTask my_task(5000, my_task_fn, NULL);
+static RAATTask my_task(5000, my_task_fn, NULL);
 
 /* Local Functions */
 

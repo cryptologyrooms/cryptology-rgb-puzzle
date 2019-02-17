@@ -122,6 +122,6 @@
         <log_module>RGB</log_module>
     </logging>
 
-    <adl protocol="url" buffer_size="32"/>
+    <raat protocol="url" buffer_size="32"/>
 
 </board>

@@ -6,20 +6,20 @@
 
 /* ADL Includes */
 
-#include "adl.h"
+#include "raat.h"
 
 #include "binary-output.h"
-#include "adl-debouncer.h"
+#include "raat-debouncer.h"
 
-#include "adl-oneshot-timer.h"
-#include "adl-oneshot-task.h"
-#include "adl-task.h"
+#include "raat-oneshot-timer.h"
+#include "raat-oneshot-task.h"
+#include "raat-task.h"
 
 #include "rgb-param.h"
 
 #if (PIXEL_TYPE == PIXEL_TYPE_NEOPIXELS)
 
-#include "adafruit-neopixel-adl.h"
+#include "adafruit-neopixel-raat.h"
 typedef AdafruitNeoPixelADL PixelType;
 #define PIXEL_DIVIDER 16
 
@@ -128,22 +128,22 @@ static void update_variable(uint8_t const * const pVariableLevels, uint16_t * p_
     s_pVariable->show();
 }
 
-static void debug_task_fn(ADLTask& pThisTask, void * pTaskData)
+static void debug_task_fn(RAATTask& pThisTask, void * pTaskData)
 {
     (void)pThisTask;
     (void)pTaskData;
-    adl_logln(LOG_RGB, "Levels:");
+    raat_logln(LOG_RGB, "Levels:");
     for (uint8_t i=0; i<5; i++)
     {
-        adl_logln(LOG_RGB, "F: %d,%d,%d, V: %d,%d,%d",
+        raat_logln(LOG_RGB, "F: %d,%d,%d, V: %d,%d,%d",
             s_pRGBFixed[i]->get(eR), s_pRGBFixed[i]->get(eG), s_pRGBFixed[i]->get(eB),
             s_pVariableLevels[(i*3)+0], s_pVariableLevels[(i*3)+1], s_pVariableLevels[(i*3)+2]
         );
     }
 }
-static ADLTask debug_task(2000, debug_task_fn, NULL);
+static RAATTask debug_task(2000, debug_task_fn, NULL);
 
-static void update_task_fn(ADLTask& pThisTask, void * pTaskData)
+static void update_task_fn(RAATTask& pThisTask, void * pTaskData)
 {
     (void)pThisTask;
     (void)pTaskData;
@@ -151,7 +151,7 @@ static void update_task_fn(ADLTask& pThisTask, void * pTaskData)
     update_variable(s_pVariableLevels, s_brightness_table);
     update_fader();
 }
-static ADLTask update_task(10, update_task_fn, NULL);
+static RAATTask update_task(10, update_task_fn, NULL);
 
 static void update_brightness_table(uint16_t * p_table, uint32_t multiplier, bool nonlinear_brightness, uint8_t nsteps)
 {
