@@ -11,12 +11,12 @@
     </defines>
 
     <devices>
-        <device name="Fixed NeoPixels" type="TLC5973">
+        <device name="Fixed LEDs" type="TLC5973">
             <setting id="pin" value="5"/>
             <setting id="num_leds" value="5"/>
         </device>
 
-        <device name="Variable NeoPixels" type="TLC5973">
+        <device name="Variable LEDs" type="TLC5973">
             <setting id="pin" value="4"/>
             <setting id="num_leds" value="5"/>
         </device>

@@ -42,7 +42,6 @@ static const uint8_t RELAY_PIN = 2;
 static bool s_game_running = true;
 static bool s_on_reset_zero_all;
 static bool s_matched [5] = {false};
-static IntegerParam* s_pFakeButtonParam = NULL;
 
 /* Private Functions */
 
@@ -92,63 +91,68 @@ bool app_get_rgb_matched(uint8_t i)
 
 /* ADL Functions */
 
-void adl_custom_setup(DeviceBase * pdevices[], int ndevices, ParameterBase * pparams[], int nparams)
+void adl_custom_setup(const raat_devices_struct& devices, const raat_params_struct& params)
 {
-    (void)ndevices; (void)pparams; (void)nparams;
-    
-    int32_t maximum = (int32_t)((IntegerParam*)pparams[5])->get();
-    RGBParam * pRGBFinish = (RGBParam*)pparams[6];
-    bool nonlinear_brightness = ((BooleanParam*)pparams[8])->get();
-    uint8_t nsteps = (uint8_t)((IntegerParam*)pparams[9])->get();
+
+    int32_t maximum = (int32_t)params.pMaximum->get();
+    bool nonlinear_brightness = params.pBrightnessBehaviour->get();
+    uint8_t nsteps = params.pNumSteps->get();
 
     if (nsteps < 1)
     {
         nsteps = 5;
-        ((IntegerParam*)pparams[9])->set(nsteps);
+        params.pNumSteps->set(nsteps);
     }
 
-    s_pFakeButtonParam = (IntegerParam*)pparams[10];
-
-    rgb_setup((PixelType*)(pdevices[0]), (PixelType*)(pdevices[1]), pRGBFinish, maximum, nonlinear_brightness, nsteps);
-    buttons_setup((BinaryOutput*)(pdevices[2]));
+    rgb_setup(devices.pFixed_LEDs, devices.pVariable_LEDs, params.pFinishRGB, maximum, nonlinear_brightness, nsteps);
+    buttons_setup(devices.pBinary_Output);
 
     pinMode(RELAY_PIN, OUTPUT);
 
     my_task.start();
 
-    s_pFakeButtonParam->set(0xFFFF);
+    params.pFakeButtonPress->set(0xFFFF);
 }
 
-void adl_custom_loop(DeviceBase * pdevices[], int ndevices, ParameterBase * pparams[], int nparams)
+void adl_custom_loop(const raat_devices_struct& devices, const raat_params_struct& params)
 {
-    (void)pdevices; (void)ndevices; (void)nparams;
+    (void)devices;
     my_task.run();
 
-    int32_t maximum = (int32_t)((IntegerParam*)pparams[5])->get();
+    int32_t maximum = params.pMaximum->get();
 
-    s_on_reset_zero_all = ((BooleanParam*)pparams[7])->get();
+    s_on_reset_zero_all = params.pResetBehaviour->get();
     
-    bool nonlinear_brightness = ((BooleanParam*)pparams[8])->get();
+    bool nonlinear_brightness = params.pBrightnessBehaviour->get();
 
-    uint8_t nsteps = (uint8_t)((IntegerParam*)pparams[9])->get();
+    uint8_t nsteps = params.pNumSteps->get();
     
-    int32_t fake_button = s_pFakeButtonParam->get();
+    int32_t fake_button = params.pFakeButtonPress->get();
 
     if (s_game_running)
     {
         buttons_tick(fake_button, nsteps-1);
     }
 
+    RGBParam* pRGBParams[5] = 
+    {
+        params.pRGB0,
+        params.pRGB1,
+        params.pRGB2,
+        params.pRGB3,
+        params.pRGB4
+    };
+
     rgb_tick(
-        (RGBParam**)pparams,
+        pRGBParams,
         buttons_get_levels(),
         maximum,
         nonlinear_brightness,
         nsteps
     );
 
-    s_game_running = !match_lights((RGBParam**)pparams, buttons_get_levels());
+    s_game_running = !match_lights(pRGBParams, buttons_get_levels());
     digitalWrite(RELAY_PIN, s_game_running ? LOW : HIGH);
 
-    s_pFakeButtonParam->set(0xFFFF);
+    params.pFakeButtonPress->set(0xFFFF);
 }
