@@ -89,9 +89,9 @@ bool app_get_rgb_matched(uint8_t i)
     return s_matched[i];
 }
 
-/* ADL Functions */
+/* RAAT Functions */
 
-void adl_custom_setup(const raat_devices_struct& devices, const raat_params_struct& params)
+void raat_custom_setup(const raat_devices_struct& devices, const raat_params_struct& params)
 {
 
     int32_t maximum = (int32_t)params.pMaximum->get();
@@ -114,7 +114,7 @@ void adl_custom_setup(const raat_devices_struct& devices, const raat_params_stru
     params.pFakeButtonPress->set(0xFFFF);
 }
 
-void adl_custom_loop(const raat_devices_struct& devices, const raat_params_struct& params)
+void raat_custom_loop(const raat_devices_struct& devices, const raat_params_struct& params)
 {
     (void)devices;
     my_task.run();
