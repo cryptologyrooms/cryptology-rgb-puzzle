@@ -11,14 +11,6 @@
 
 #include "raat.h"
 
-#if (PIXEL_TYPE == PIXEL_TYPE_NEOPIXELS)
-#include "adafruit-neopixel-raat.h"
-typedef AdafruitNeoPixelADL PixelType;
-#elif  (PIXEL_TYPE == PIXEL_TYPE_TLC5973)
-#include "TLC5973.h"
-typedef TLC5973 PixelType;
-#endif
-
 #include "binary-output.h"
 
 #include "raat-oneshot-timer.h"
@@ -31,6 +23,7 @@ typedef TLC5973 PixelType;
 
 /* Application Includes */
 
+#include "application.h"
 #include "buttons.h"
 #include "rgb.h"
 
@@ -73,6 +66,27 @@ static bool match_lights(RGBParam * pRGBFixed[5], uint8_t const * const pVariabl
     return all_matched;
 }
 
+static void play_intro(PixelType * pFixed, PixelType * pVariable)
+{           
+    const uint16_t intens = 2048 / PIXEL_DIVIDER;
+     
+    for (uint8_t light = 0; light < 5; light++)
+    {
+        for (uint8_t rgb = 0; rgb < 3; rgb++)
+        {
+            pFixed->setPixelColor(light, rgb==0?intens:0, rgb==1?intens:0, rgb==2?intens:0);
+            pFixed->show();
+            pVariable->setPixelColor(light, rgb==0?intens:0, rgb==1?intens:0, rgb==2?intens:0);
+            pVariable->show();
+            delay(500);
+            pFixed->setPixelColor(light, 0,0,0);
+            pFixed->show();
+            pVariable->setPixelColor(light, 0,0,0);
+            pVariable->show();
+        }
+    }
+}
+
 void app_reset_rgb()
 {
     for (uint8_t i=0; i<5;i++)
@@ -104,6 +118,8 @@ void raat_custom_setup(const raat_devices_struct& devices, const raat_params_str
         params.pNumSteps->set(nsteps);
     }
 
+    play_intro(devices.pFixed_LEDs, devices.pVariable_LEDs);
+
     rgb_setup(devices.pFixed_LEDs, devices.pVariable_LEDs, params.pFinishRGB, maximum, nonlinear_brightness, nsteps);
     buttons_setup(devices.pBinary_Output);
 
@@ -112,6 +128,23 @@ void raat_custom_setup(const raat_devices_struct& devices, const raat_params_str
     my_task.start();
 
     params.pFakeButtonPress->set(0xFFFF);
+
+    /*Serial.println("Settings:");
+    Serial.print("Reset ");
+    if (params.pResetBehaviour->get())
+    {
+        Serial.println("all");
+    }
+    else
+    {
+        Serial.println("matched");
+    }
+
+    if (params.pBrightnessBehaviour->get())
+    {
+        Serial.print("Non");
+    }
+    Serial.println("linear");*/
 }
 
 void raat_custom_loop(const raat_devices_struct& devices, const raat_params_struct& params)

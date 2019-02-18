@@ -17,20 +17,6 @@
 
 #include "rgb-param.h"
 
-#if (PIXEL_TYPE == PIXEL_TYPE_NEOPIXELS)
-
-#include "adafruit-neopixel-raat.h"
-typedef AdafruitNeoPixelADL PixelType;
-#define PIXEL_DIVIDER 16
-
-#elif  (PIXEL_TYPE == PIXEL_TYPE_TLC5973)
-
-#include "TLC5973.h"
-typedef TLC5973 PixelType;
-#define PIXEL_DIVIDER 1
-
-#endif
-
 /* Application Includes */
 
 #include "application.h"
@@ -199,7 +185,7 @@ void rgb_tick(RGBParam * pRGBFixed[5], uint8_t const * const pVariableLevels, ui
         s_nsteps = nsteps;
         update_brightness_table(s_brightness_table, s_multiplier, nonlinear_brightness, nsteps);
         Serial.println("New table:");
-        for (uint8_t i; i < nsteps; i++)
+        for (uint8_t i = 0; i < nsteps; i++)
         {
             Serial.print(s_brightness_table[i]);
             Serial.print(", ");
